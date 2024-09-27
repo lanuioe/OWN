@@ -1,11 +1,14 @@
-import './App.css';
+import "./App.css";
+import { Reset } from "styled-reset";
+import MainHome from "./component/MainHome";
 
 function App() {
-	return (
-		<>
-			aaa
-		</>
-	);
+  return (
+    <>
+      <Reset />
+      <MainHome />
+    </>
+  );
 }
 
 export default App;
