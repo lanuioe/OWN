@@ -7,8 +7,17 @@ export const colors = {
 }
 
 export const fontSize = {
-    kSizeText : '20px',
-    kSizeHead : '26px',
-    eSizeText : '100px',
-    eSizeHead : '150px'
+    kSizeText : '1.04vw', // 20px
+    kSizeHead : '1.35vw', // 26px
+    eSizeText : '5.2vw',  // 100px
+    eSizeHead : '7.81vw', // 150px;
+    introNum : '4.16vw', // 80px
+    introHead : '7.03vw', // 135px
 }
+
+const styles = {
+    colors,
+    fontSize
+}
+
+export default styles;
