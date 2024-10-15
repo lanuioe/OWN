@@ -23,7 +23,7 @@ const SoundButton = () => {
     return (
         <SoundBtnWrap>
             <SoundBtn>
-                <audio src={music} autoplay />
+                <audio src={music} />
             </SoundBtn>
         </SoundBtnWrap>
     );

@@ -12,6 +12,7 @@
     "react-router-dom": "^6.26.2",
     "react-scripts": "5.0.1",
     "styled-components": "^6.1.13",
+    "styled-normalize": "^8.1.1",
     "styled-reset": "^4.5.2",
     "web-vitals": "^2.1.4"
   },
@@ -38,5 +39,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
