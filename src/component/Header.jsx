@@ -10,8 +10,8 @@ const HeaderWrap = styled.header`
     display: flex;
     justify-content: space-around;
     align-items: center;
-
-    
+    position: fixed;
+    top: 0;
 `
 const ContentListWrap = styled.div`
     border: 1px solid ${colors.mainOrange};
@@ -25,7 +25,6 @@ const HeaderContentList = styled.ol`
     padding-right: 56px;
     padding-left: 56px;
     gap: 60px;    
-
     li{
         font-size: 1.25vw;
         color: #FD4525;
@@ -37,7 +36,6 @@ const HeaderContentList = styled.ol`
 
 const Header = () => {
     return (
-
         <HeaderWrap>
             <div> <img src={logo} /></div>
             <ContentListWrap> 
