@@ -1,21 +1,21 @@
 import "./App.css";
 import { Reset } from "styled-reset";
-import GlobalStyle from './GlobalStyle'
-import { ThemeProvider } from 'styled-components';
-import MainHome from "./component/MainHome";
-import Header from "./component/Header"
-import Router from './Router'
+import { BrowserRouter } from "react-router-dom";
+import GlobalStyle from "./GlobalStyle";
+import Header from "./component/Header";
+import Router from "./Router";
+import { ColorProvider } from "./ColorContext";
 
 function App() {
   return (
-    <>
-      <GlobalStyle />
-      <Reset />
-      <Header />
-      <Router />
-
-
-    </>
+    <ColorProvider>
+      <BrowserRouter>
+        <GlobalStyle />
+        <Reset />
+        <Header />
+        <Router />
+      </BrowserRouter>
+    </ColorProvider>
   );
 }
 
