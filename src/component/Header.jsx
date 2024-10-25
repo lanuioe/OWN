@@ -53,13 +53,21 @@ const Header = () => {
     location.pathname === "/" || location.pathname === "/#"
   );
 
-  useEffect(() => {
-    setIsRoot(location.pathname === "/" || location.pathname.includes("/#"));
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
-
-  const { color } = useColor();
+  const { color, setColor } = useColor();
   let Logo = color === MAIN_ORANGE ? logoOrange : logoWhite;
+
+  useEffect(() => {
+    const isRootPath =
+      location.pathname === "/" || location.pathname.includes("/#");
+
+    setIsRoot(isRootPath);
+
+    if (!isRootPath) {
+      setColor(MAIN_ORANGE);
+    }
+
+    window.scrollTo(0, 0);
+  }, [location.pathname, setColor]);
 
   return (
     <HeaderWrap isRoot={isRoot} color={color}>
