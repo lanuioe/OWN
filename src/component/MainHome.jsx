@@ -1,17 +1,17 @@
 import styled from "styled-components";
-import { useState } from "react";
-import RandomBg from "./RandomBg";
+import vwCalc from "../util/vwCalc";
+import { BasePretendard20 } from "./style/BasePretendard";
 
-const PADDING_SIDE = "calc((80 / 1920) * 100vw)";
+const PADDING_SIDE = vwCalc(80);
 
 const MainWrapper = styled.section`
   position: relative;
-  color: ${(props) => props.$textColor};
+  color: ${(props) => props.$color};
+  text-transform: uppercase;
 `;
 
 const Slogan = styled.div`
-  font-size: calc((140 / 1920) * 100vw);
-  text-transform: uppercase;
+  font-size: ${vwCalc(140)};
   white-space: nowrap;
 `;
 
@@ -20,31 +20,19 @@ const Strong = styled.span`
   font-style: italic;
 `;
 
-const TextPos1 = styled.div`
-  padding-top: calc((303 / 1920) * 100vw);
-  margin-left: calc((349 / 1920) * 100vw);
-`;
-
-const TextPos2 = styled.div`
-  margin-left: calc((198 / 1920) * 100vw);
-`;
-
-const TextPos3 = styled.span`
-  margin-left: calc((359 / 1920) * 100vw);
-`;
-
-const TextPos4 = styled.div`
-  margin-left: calc((984 / 1920) * 100vw);
+const TextPos = styled.div`
+  margin-left: ${(props) => vwCalc(props.marginLeft) || 0};
+  padding-top: ${(props) => vwCalc(props.paddingTop) || 0};
 `;
 
 const ServiceIntroduction = styled.p`
   position: absolute;
-  top: calc((630 / 1920) * 100vw);
-  left: calc((217 / 1920) * 100vw);
-  width: calc((502 / 1920) * 100vw);
-  font-size: calc((21 / 1920) * 100vw);
+  top: ${vwCalc(630)};
+  left: ${vwCalc(217)};
+  width: ${vwCalc(502)};
+  font-size: ${vwCalc(21)};
   font-weight: 400;
-  line-height: 150%;
+  line-height: 1.5;
 `;
 
 const Flex = styled.ul`
@@ -52,38 +40,64 @@ const Flex = styled.ul`
   justify-content: space-between;
   padding: 0 ${PADDING_SIDE};
   margin-top: 24vh;
-  text-transform: uppercase;
 `;
 
-const ServiceKeyword = styled.li`
-  font-size: calc((20 / 1920) * 100vw);
+const Background = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(${(props) => props.$backgroundImage});
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
 `;
 
-const MainHome = () => {
-  const [textColor, setTextColor] = useState("#FFFFFF");
+const textData = [
+  { text: "you can own", marginLeft: 349, paddingTop: 303 },
+  { text: "a rest", marginLeft: 198, isInline: true, isStrong: true },
+  { text: "and find", marginLeft: 359, isInline: true },
+  { text: "yourself", marginLeft: 984, isStrong: true },
+];
+
+const keywordData = [
+  "to own a rest",
+  "with an analog kit",
+  "different experience",
+];
+
+const MainHome = ({ color, backgroundImage }) => {
   return (
-    <MainWrapper $textColor={textColor}>
+    <MainWrapper $color={color}>
       <Slogan>
-        <TextPos1>you can own</TextPos1>
-        <TextPos2>
-          <Strong>a rest</Strong>
-          <TextPos3>and find</TextPos3>
-        </TextPos2>
-        <TextPos4>
-          <Strong>yourself</Strong>
-        </TextPos4>
+        {textData.map(
+          ({ text, marginLeft, paddingTop, isStrong, isInline }, index) => (
+            <TextPos
+              key={index}
+              marginLeft={marginLeft}
+              paddingTop={paddingTop}
+              as={isInline ? "span" : "div"}
+            >
+              {isStrong ? <Strong>{text}</Strong> : text}
+            </TextPos>
+          )
+        )}
       </Slogan>
+
       <ServiceIntroduction>
         사람들은 바쁘게 흘러가는 현대사회로 인해, 쉴 수 없어지면서 점점 휴식을
         잊어버리게 되었습니다. 오운은 여러분이 휴식을 취하면서 스스로를 찾아
         나갈 수 있도록 돕습니다.
       </ServiceIntroduction>
+
       <Flex>
-        <ServiceKeyword>to own a rest</ServiceKeyword>
-        <ServiceKeyword>with an analog kit</ServiceKeyword>
-        <ServiceKeyword>different experience</ServiceKeyword>
+        {keywordData.map((text, index) => (
+          <BasePretendard20 key={index} as="li" color={color}>
+            {text}
+          </BasePretendard20>
+        ))}
       </Flex>
-      <RandomBg setTextColor={setTextColor} />
+      <Background $backgroundImage={backgroundImage} />
     </MainWrapper>
   );
 };

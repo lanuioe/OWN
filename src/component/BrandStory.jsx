@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SectionsContainer, Section } from "react-fullpage";
 import { colors } from "../styles";
 import MainHome from "./MainHome";
@@ -15,13 +15,39 @@ import InsightResult from "./brandStory/InsightResult";
 import Solution from "./Solution";
 import Outro from "./Outro";
 import vwCalc from "../util/vwCalc";
+import { useColor } from "../ColorContext";
+import img1 from "../assets/brandStory/mainHome_bg1.webp";
+import img2 from "../assets/brandStory/mainHome_bg2.webp";
+import img3 from "../assets/brandStory/mainHome_bg3.webp";
+import img4 from "../assets/brandStory/mainHome_bg4.webp";
+import img5 from "../assets/brandStory/mainHome_bg5.webp";
+import img6 from "../assets/brandStory/mainHome_bg6.webp";
+import img7 from "../assets/brandStory/mainHome_bg7.webp";
+import img8 from "../assets/brandStory/mainHome_bg8.webp";
+import getRandomImage from "../util/getRandomImage";
+
+const MAIN_ORANGE = colors.mainOrange;
+const MAIN_IVORY = colors.mainIvory;
+const SMALL_BLACK = colors.smallBlack;
+const WHITE = " #FFFFFF";
+
+const images = [
+  { url: img1, color: WHITE },
+  { url: img2, color: WHITE },
+  { url: img3, color: MAIN_IVORY },
+  { url: img4, color: MAIN_ORANGE },
+  { url: img5, color: MAIN_IVORY },
+  { url: img6, color: MAIN_ORANGE },
+  { url: img7, color: MAIN_ORANGE },
+  { url: img8, color: MAIN_IVORY },
+];
 
 const backgroundColors = {
   0: "transparent",
-  7: colors.smallBlack,
-  8: colors.smallBlack,
-  9: colors.smallBlack,
-  default: colors.mainIvory,
+  7: SMALL_BLACK,
+  8: SMALL_BLACK,
+  9: SMALL_BLACK,
+  default: MAIN_IVORY,
 };
 
 const SectionWrapper = styled.div`
@@ -56,10 +82,24 @@ const StyledNavigation = styled.div`
 `;
 
 const BrandStory = () => {
+  const { setColor } = useColor();
   const [initialActiveSection, setInitialActiveSection] = useState(0);
+  const [selectedImage] = useState(() => getRandomImage(images));
+
+  useEffect(() => {
+    setColor(selectedImage.color);
+  }, [setColor, selectedImage]);
 
   const onScroll = (p) => {
-    if (initialActiveSection === 0) setInitialActiveSection(p.activeSection);
+    const currentSection = p.activeSection;
+
+    if (currentSection === 0) {
+      setColor(selectedImage.color);
+    } else {
+      setColor(MAIN_ORANGE);
+    }
+
+    setInitialActiveSection(currentSection);
   };
 
   const scrollToTop = () => {
@@ -67,7 +107,14 @@ const BrandStory = () => {
   };
 
   const sections = [
-    { content: <MainHome /> },
+    {
+      content: (
+        <MainHome
+          color={selectedImage.color}
+          backgroundImage={selectedImage.url}
+        />
+      ),
+    },
     { content: <Overflow1 /> },
     { content: <Overflow2 /> },
     { content: <Overflow3 /> },
