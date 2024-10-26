@@ -1,21 +1,19 @@
-
-import React from 'react';
-import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
-import MainHome from './component/MainHome'
-import IntroBranding from './brandingIntro/IntroBranding'
-import AppService from './appservice/AppService'
+import React from "react";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import BrandStory from "./component/BrandStory";
+import IntroBranding from "./brandingIntro/IntroBranding";
+import AppService from "./appservice/AppService";
+import Sticker from './stickerbook/Sticker'
 
 const Router = () => {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path='/' element={<MainHome />} />
-                <Route path='/introbranding' element={<IntroBranding />} />
-                <Route path='/appservice' element ={<AppService />} />
-                {/* ex */}
-            </Routes>
-        </BrowserRouter>
-    );
+  return (
+    <Routes>
+      <Route path="/" element={<BrandStory />} />
+      <Route path="/introbranding" element={<IntroBranding />} />
+      <Route path="/appservice" element={<AppService />} />
+      <Route path='/sticker' element ={<Sticker />} />
+    </Routes>
+  );
 };
 
 export default Router;
