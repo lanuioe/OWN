@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import vwCalc from "../util/vwCalc";
-import { BasePretendard20 } from "./style/BasePretendard";
+import vwCalc from "../../util/vwCalc";
+import { BasePretendard20 } from "../style/BasePretendard";
 
 const PADDING_SIDE = vwCalc(80);
 
