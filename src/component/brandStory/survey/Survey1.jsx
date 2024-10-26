@@ -1,8 +1,13 @@
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
+import { useState } from "react";
+import { colors } from "../../../styles";
 import vwCalc from "../../../util/vwCalc";
+import useIntersectionObserverRef from "../../../hook/useIntersectionObserverRef";
 import SurveyTitle from "./SurveyTitle";
 import SurveyInfo from "./SurveyInfo";
-import { colors } from "../../../styles";
+
+const MAIN_ORANGE = colors.mainOrange;
+const GRAY = "#DFDFDF";
 
 const Wrapper = styled.div`
   position: relative;
@@ -14,17 +19,81 @@ const Section = styled.section`
   z-index: 1;
 `;
 
-const RedCircle = styled.div`
+const CircleBase = styled.div`
   position: absolute;
+  border-radius: 50%;
+
+  ${({ animation }) =>
+    animation &&
+    css`
+      animation: ${animation} 2s ease-in-out forwards;
+    `}
+`;
+
+const moveRedCircle = keyframes`
+  0% {
+    width: ${vwCalc(821)};
+    height: ${vwCalc(821)};
+    left: ${vwCalc(50)};
+    bottom: ${vwCalc(-80)};
+  }
+  100% {
+    width: ${vwCalc(1087)};
+    height: ${vwCalc(1087)};
+    left: ${vwCalc(358)};
+    bottom: ${vwCalc(-165)};
+  }
+`;
+
+const moveGrayCircle = keyframes`
+  0% {
+    width: ${vwCalc(192)};
+    height: ${vwCalc(192)};
+    left: ${vwCalc(1280)};
+  }
+  100% {
+    width: ${vwCalc(322)};
+    height: ${vwCalc(322)};
+    left: ${vwCalc(1400)};
+  }
+`;
+
+const RedCircle = styled(CircleBase)`
   width: ${vwCalc(821)};
   height: ${vwCalc(821)};
-  top: ${vwCalc(303)};
   left: ${vwCalc(50)};
-  background-color: ${colors.mainOrange};
-  border-radius: 50%;
+  bottom: ${vwCalc(-80)};
+  background-color: ${MAIN_ORANGE};
+
+  animation: ${({ animate }) => (animate ? moveRedCircle : "none")} 2.8s
+    ease-in-out forwards;
+`;
+
+const GrayCircle = styled(CircleBase)`
+  width: ${vwCalc(192)};
+  height: ${vwCalc(192)};
+  left: ${vwCalc(1280)};
+  bottom: ${vwCalc(-34)};
+  background-color: ${GRAY};
+
+  animation: ${({ animate }) => (animate ? moveGrayCircle : "none")} 1.5s
+    ease-in-out forwards;
 `;
 
 const Survey1 = () => {
+  const [redCircleVisible, setRedCircleVisible] = useState(false);
+  const [grayCircleVisible, setGrayCircleVisible] = useState(false);
+
+  const redCircleRef = useIntersectionObserverRef({
+    callback: () => setRedCircleVisible(true),
+    options: { root: null, rootMargin: "0px", threshold: 0.8 },
+  });
+
+  const grayCircleRef = useIntersectionObserverRef({
+    callback: () => setGrayCircleVisible(true),
+    options: { root: null, rootMargin: "0px", threshold: 0.8 },
+  });
+
   return (
     <Wrapper>
       <Section>
@@ -40,7 +109,8 @@ const Survey1 = () => {
           participantNum="1,542"
         />
       </Section>
-      <RedCircle></RedCircle>
+      <RedCircle ref={redCircleRef} animate={redCircleVisible} />
+      <GrayCircle ref={grayCircleRef} animate={grayCircleVisible} />
     </Wrapper>
   );
 };

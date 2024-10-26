@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import vwCalc from "../util/vwCalc";
-import { colors } from "../styles";
-import { BasePoppins100 } from "./style/BasePoppins";
-import { BasePretendard26 } from "./style/BasePretendard";
-import ImgBox from "./ImgBox";
-import branding from "../assets/brandStory/outro_branding.png";
-import arrow from "../assets/icon/arrow.svg";
+import vwCalc from "../../util/vwCalc";
+import { colors } from "../../styles";
+import { BasePoppins100 } from "../style/BasePoppins";
+import { BasePretendard26 } from "../style/BasePretendard";
+import ImgBox from "../ImgBox";
+import branding from "../../assets/brandStory/outro_branding.png";
+import arrow from "../../assets/icon/arrow.svg";
 
 const Section = styled.section`
   padding-top: ${vwCalc(148)};

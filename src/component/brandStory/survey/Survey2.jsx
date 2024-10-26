@@ -1,13 +1,23 @@
 import styled from "styled-components";
+import { colors } from "../../../styles";
 import vwCalc from "../../../util/vwCalc";
+import { BasePretendard20 } from "../../style/BasePretendard";
 import SurveyTitle from "./SurveyTitle";
 import SurveyInfo from "./SurveyInfo";
-import { colors } from "../../../styles";
-import { BasePretendard20 } from "../../style/BasePretendard";
+import BarChartContainer from "./BarChartContainer";
 
 const GRAY = "#DFDFDF";
 const MAIN_ORANGE = colors.mainOrange;
-const WHITE = "#FFFFFF";
+
+const barChartData = [
+  { color: GRAY, targetHeight: vwCalc(346), label: "1 to 10 minutes" },
+  { color: GRAY, targetHeight: vwCalc(503), label: "10 to 30 minutes" },
+  {
+    color: MAIN_ORANGE,
+    targetHeight: vwCalc(914),
+    label: "30 minutes to 1 hour",
+  },
+];
 
 const Wrapper = styled.div`
   position: relative;
@@ -21,33 +31,6 @@ const BarChartWrapper = styled(BasePretendard20)`
   display: flex;
   gap: ${vwCalc(44)};
   align-items: flex-end;
-`;
-
-const BarChart = styled.ol`
-  display: flex;
-  flex-direction: column;
-  width: ${vwCalc(215)};
-  padding-bottom: ${vwCalc(28)};
-  justify-content: flex-end;
-  font-family: Pretendard;
-  text-align: center;
-  text-transform: uppercase;
-`;
-
-const BarChart1 = styled(BarChart)`
-  background-color: ${GRAY};
-  height: ${vwCalc(346)};
-`;
-
-const BarChart2 = styled(BarChart)`
-  background-color: ${GRAY};
-  height: ${vwCalc(503)};
-`;
-
-const BarChart3 = styled(BarChart)`
-  background-color: ${MAIN_ORANGE};
-  height: ${vwCalc(914)};
-  color: ${WHITE};
 `;
 
 const Survey2 = () => {
@@ -67,13 +50,14 @@ const Survey2 = () => {
         />
       </section>
       <BarChartWrapper as="ul">
-        <BarChart1>1 to 10 minutes </BarChart1>
-        <BarChart2>10 to 30 minutes</BarChart2>
-        <BarChart3>
-          30 minutes
-          <br />
-          to 1 hour
-        </BarChart3>
+        {barChartData.map((data, index) => (
+          <BarChartContainer
+            key={index}
+            color={data.color}
+            targetHeight={data.targetHeight}
+            label={data.label}
+          />
+        ))}
       </BarChartWrapper>
     </Wrapper>
   );

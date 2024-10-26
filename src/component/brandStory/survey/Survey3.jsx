@@ -7,12 +7,12 @@ import ImgBox from "../../ImgBox";
 
 const Wrapper = styled.div`
   position: relative;
-  padding-right: ${vwCalc(1062)};
-  // background-color: lightyellow;
+  padding-right: ${vwCalc(634)};
 `;
 
 const Section = styled.section`
   position: relative;
+  width: ${vwCalc(1000)};
   z-index: 1;
 `;
 

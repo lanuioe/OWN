@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Typo from "./brandStory/solution/Typo";
-import CoreValue from "./brandStory/solution/CoreValue";
-import Keyword from "./brandStory/solution/Keyword";
+import Typo from "./solution/Typo";
+import CoreValue from "./solution/CoreValue";
+import Keyword from "./solution/Keyword";
 
 const Section = styled.section`
   text-transform: uppercase;
