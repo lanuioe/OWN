@@ -4,7 +4,6 @@ import BrandStory from "./component/BrandStory";
 import IntroBranding from "./brandingIntro/IntroBranding";
 import AppService from "./appservice/AppService";
 import Sticker from './stickerbook/Sticker'
-import Analog from './analog/Analog'
 
 const Router = () => {
   return (
@@ -13,7 +12,6 @@ const Router = () => {
       <Route path="/introbranding" element={<IntroBranding />} />
       <Route path="/appservice" element={<AppService />} />
       <Route path='/sticker' element ={<Sticker />} />
-      <Route path='/analog' element ={<Analog />} />
     </Routes>
   );
 };
