@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState} from 'react';
 import { Reset } from "styled-reset";
 import styled from 'styled-components'
 import {colors, fontSize} from '../styles'
@@ -8,15 +8,23 @@ import estBg1 from '../assets/brandingIntro/est_bg_1.png'
 import estBg2 from '../assets/brandingIntro/est_bg_2.png'
 import estBg3 from '../assets/brandingIntro/est_bg_3.png'
 import tiredLifeRelax from '../assets/brandingIntro/tiredRelax.png'
+
 import OwnColorBg1 from '../assets/brandingIntro/OwnColorBg_1.png'
+import OwnColorBg2 from '../assets/brandingIntro/OwnColorBg_2.png'
+import OwnColorBg3 from '../assets/brandingIntro/OwnColorBg_3.png'
+import OwnColorBg4 from '../assets/brandingIntro/OwnColorBg_4.png'
+
 import Typo_K from '../assets/brandingIntro/typo_k.png'
 import Typo_E from '../assets/brandingIntro/typo_e.png'
+import Typo_Kimg from '../assets/brandingIntro/typo_kk.png'
+import Typo_Eimg from '../assets/brandingIntro/typo_ee.png'
 import Intro_logo from '../assets/brandingIntro/own_logo_intro.png'
 import Own_logo_1 from '../assets/brandingIntro/own_logo_1.png'
 import Own_logo_2 from '../assets/brandingIntro/own_logo_2.png'
 import Own_logo_3 from '../assets/brandingIntro/own_logo_3.png'
 import Own_logo_4 from '../assets/brandingIntro/own_logo_4.png'
 import Own_logo_5 from '../assets/brandingIntro/own_logo_5.png'
+
 import Metapo_bg_1 from '../assets/brandingIntro/metapo_bg/metapo_1.png'
 import Metapo_bg_2 from '../assets/brandingIntro/metapo_bg/metapo_2.png'
 import Metapo_bg_4 from '../assets/brandingIntro/metapo_bg/metapo_4.png'
@@ -24,20 +32,28 @@ import Metapo_bg_6 from '../assets/brandingIntro/metapo_bg/metapo_6.png'
 import Metapo_bg_8 from '../assets/brandingIntro/metapo_bg/metapo_8.png'
 import Metapo_bg_9 from '../assets/brandingIntro/metapo_bg/metapo_9.png'
 
-import Metapo_obj_o1 from '../assets/brandingIntro/metapo_obj/metapo_o1.png'
-import Metapo_obj_v2 from '../assets/brandingIntro/metapo_obj/metapo_v2.png'
-import Metapo_obj_c4 from '../assets/brandingIntro/metapo_obj/metapo_c4.png'
-import Metapo_obj_g6 from '../assets/brandingIntro/metapo_obj/metapo_g6.png'
-import Metapo_obj_s8 from '../assets/brandingIntro/metapo_obj/metapo_s8.png'
-import Metapo_obj_r9 from '../assets/brandingIntro/metapo_obj/metapo_r9.png'
-
+import Metapo_obj_1 from '../assets/brandingIntro/metapo_obj/metapo_1.png'
+import Metapo_obj_2 from '../assets/brandingIntro/metapo_obj/metapo_2.png'
+import Metapo_obj_4 from '../assets/brandingIntro/metapo_obj/metapo_4.png'
+import Metapo_obj_6 from '../assets/brandingIntro/metapo_obj/metapo_6.png'
+import Metapo_obj_8 from '../assets/brandingIntro/metapo_obj/metapo_8.png'
+import Metapo_obj_9 from '../assets/brandingIntro/metapo_obj/metapo_9.png'
 import OwnNametag from '../assets/brandingIntro/own_nametag.png'
 import OwnStory from '../assets/brandingIntro/own_story.png'
 import OwnInsta from '../assets/brandingIntro/own_insta.png'
 import OwnMockup from '../assets/brandingIntro/own_mockup.png'
 
+import IntroMainBg from '../assets/brandingIntro/introMainBg.gif'
+
+
 const IntroBrandingWrap = styled.div`
     margin: 0 10.2vw;
+    position: relative;
+    div.intro_main_bg{
+        position: absolute;
+        left: -8vw;
+        bottom: -7.2vw;
+    }
 `
 const MainButton = styled.button`
     margin: 0 0 0 2.6vh;
@@ -55,6 +71,7 @@ const MainButton = styled.button`
 `
 const MainTextWrap = styled.div`
     display: flex;
+    flex-wrap: nowrap;
     flex-direction: column;
     gap: 20px;
     div.main_text_1{
@@ -64,13 +81,14 @@ const MainTextWrap = styled.div`
         margin: 0 2.9vw 0 0;
     }
     h2:nth-child(2){
-        margin : 0 0 0 14.7vw;
+        margin : 0 0 0 11.7vw;
     }
     h2:nth-child(4){
         text-align: right;
     }
     p{
-        font-size: ${fontSize.kSizeText};
+        font-size: ${fontSize.kSizeText20};
+        line-height: 1.51vw;
         text-align: right;
     }
 `
@@ -80,7 +98,7 @@ const MainText = styled.h2`
 `
 
 const CoreValueWrap = styled.div`
-    margin : 18.64vw 6.87vw 0 6.87vw;;
+    margin : 18.64vw 6.87vw 0 6.87vw;
     display: flex;
     flex-direction: column;
     
@@ -101,9 +119,9 @@ const CoreValueText = styled.div`
         }
     }
     p{
-        font-size: ${fontSize.kSizeText};
+        font-size: ${fontSize.kSizeText20};
         text-align: center;
-        line-height: 1;
+        line-height: 1.51vw;
     }
 `
 const CoreValueImg = styled.div`
@@ -120,7 +138,7 @@ const CoreValueImg = styled.div`
         background-position: center;
         position: relative;
         span{
-            font-size: ${fontSize.kSizeText};
+            font-size: ${fontSize.kSizeText20};
             position: absolute;
             bottom: 1.9vw;
             // 정확한 마진을 피그마에서 알수없어서 일단 보류
@@ -185,10 +203,11 @@ const OwnColorWrap = styled.div`
         div.OwnColorBg{
             margin-top : 1.56vw;
             width : 100%;
-            height: 50.83vw;
+            height: 50.83vw;                                                                                            
             background-image: url(${OwnColorBg1});
+            background-size: cover;
+            transition: 0.3s ease;
         }
-
 `
 const OwnColorText = styled.div`
     display: grid;
@@ -208,6 +227,7 @@ const OwnColor = styled.div`
     align-items: center;
     gap: 1.14vw;
     position: relative;
+    div{ cursor: pointer; }
     p{
         transform: rotate(-90deg);
         transform-origin: top left;
@@ -257,36 +277,24 @@ const OwnTypoText = styled.div`
 const OwnTypo = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
+    div{
+        width: 50vw;
+    }
     div:nth-child(1){
-        width: auto;
-        height: 57.29vw;
         background-image: url(${Typo_K});
+        background-size: contain;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 5.99vw 0 3.125vw 3.33vw;
+        gap: 31.4vw;
+        padding: 5.88vw 0 9.68vw 4.58vw;
     }
     div:nth-child(2){
-        width: auto;
-        height: 57.29vw;
-        color: #ABB9C2;
-        padding: 5.99vw 0 3.125vw 3.33vw;
+        padding: 5.99vw 4.58vw 3.125vw 3.33vw;
         background-color: ${colors.mainIvory};
-        span{
-            font-size: 1.66vw;
-            line-height: 130%;
-        }
-        p{
-            font-size: 35.41vw;
-            line-height: 1;
-            text-align: center;
-        }
     }
     div:nth-child(3){
-        width: auto;
-        height: 57.29vw;
-        color: #868B51;
-        padding: 5.99vw 0 3.125vw 3.33vw;
+        padding: 30.83vw 5.1vw 3.125vw 3.33vw;
         background-color: ${colors.mainIvory};
         span{
             font-size: 1.66vw;
@@ -298,13 +306,14 @@ const OwnTypo = styled.div`
         }
     }
     div:nth-child(4){
-        width: auto;
-        height: 57.29vw;
         background-image: url(${Typo_E});
+        background-size: cover;
+        
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         padding: 5.99vw 0 3.125vw 3.33vw;
+        gap: 48.59vw;
     }
     p.own_typo_p{
         font-size: 6.66vw;
@@ -324,7 +333,7 @@ const OwnLogoWrap = styled.div`
         width: 100%;
         height: 38.54vw;
         background-image: url(${Intro_logo});
-
+        background-size: auto;
     }
 `
 
@@ -356,16 +365,43 @@ const OwnMetapoText = styled.div`
 `
 const OwnMetapo = styled.div`
     display: grid;
-    grid-auto-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.93vw;
+    p.metapo_text{
+        width: 20.4vw;
+        font-size: ${fontSize.kSizeText20};
+        font-weight: 400;
+        line-height: 1.77vw;
+        color: ${colors.smallBlack};
+    }
     div{
         width: 30.46vw;
         height: 30.46vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1.82vw;
+        p{
+            font-size: 2.6vw;
+            font-weight: 700;
+            line-height: 3.9vw;
+            color: ${colors.mainIvory};
+        }
+        img{
+            max-width: 15.88vw;
+        }
     }
-    div:nth-child(1){
-        background-image: url(${Metapo_bg_1});
-    }
+    div:nth-child(1){ background-image: url(${Metapo_bg_1})};
+    div:nth-child(2){ background-image: url(${Metapo_bg_2})};
+    div:nth-child(4){ background-image: url(${Metapo_bg_4})};
+    div:nth-child(6){ background-image: url(${Metapo_bg_6})};
+    div:nth-child(8){ background-image: url(${Metapo_bg_8})};
+    div:nth-child(9){ background-image: url(${Metapo_bg_9})};
+    
 `
 const OwnMockWrap = styled.div`
+    margin-top: 0.88vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
     img:nth-child(1), img:nth-child(4){
@@ -373,7 +409,23 @@ const OwnMockWrap = styled.div`
     }
 `
 
+
+
 const IntroBranding = () => {
+
+    const [backgroundImage, setBackgroundImage] = useState('');
+
+    // 각 색상에 따라 배경 이미지를 변경하는 함수
+    const handleMouseEnter = (imageUrl) => {
+        setBackgroundImage(`url(${imageUrl})`);
+    };
+
+    // 마우스가 떠나면 배경 이미지를 초기화하는 함수
+    const handleMouseLeave = () => {
+        setBackgroundImage('');
+    };
+
+
     return (
         <>
             <Reset />
@@ -390,7 +442,7 @@ const IntroBranding = () => {
                         되었습니다. 오운은 여러분이 휴식을 취하면서 스스로를 찾아 나갈 수 있도록 돕습니다.</p>
                 </MainTextWrap>
                 <div className="intro_main_bg">
-
+                    <img src={IntroMainBg} />
                 </div>
             </IntroBrandingWrap>
             <CoreValueWrap>
@@ -434,12 +486,20 @@ const IntroBranding = () => {
                     <HeadText> NATURAL COLORS </HeadText>
                 </OwnColorText>
                 <OwnColor>
-                    <div className="OwnColorSunset"> <p> SUNSET RED <br/> FF562F </p> </div>
-                    <div className="OwnColorSky"> <p> SKY BLUE <br/> 83CBFA </p> </div>
-                    <div className="OwnColorIvory"> <p> PEACEFUL IVORY <br/> FAF4F4 </p> </div>
-                    <div className="OwnColorBeige"> <p> BEED BEIGE <br/> CDBCA5 </p> </div>
+                    <div className="OwnColorSunset" 
+                    onMouseEnter={() => handleMouseEnter({OwnColorBg1})}
+                    onMouseLeave={handleMouseLeave}> <p> SUNSET RED <br/> FF562F </p> </div>
+                    <div className="OwnColorSky"
+                    onMouseEnter={() => handleMouseEnter(OwnColorBg2)}
+                    onMouseLeave={handleMouseLeave}> <p> SKY BLUE <br/> 83CBFA </p> </div>
+                    <div className="OwnColorIvory" 
+                    onMouseEnter={() => handleMouseEnter(OwnColorBg3)}
+                    onMouseLeave={handleMouseLeave}> <p> PEACEFUL IVORY <br/> FAF4F4 </p> </div>
+                    <div className="OwnColorBeige" 
+                    onMouseEnter={() => handleMouseEnter(OwnColorBg4)}
+                    onMouseLeave={handleMouseLeave}> <p> BEED BEIGE <br/> CDBCA5 </p> </div>
                 </OwnColor>
-                <div className="OwnColorBg">
+                <div className="OwnColorBg" style={{ backgroundImage: backgroundImage,}}>
 
                 </div>
             </OwnColorWrap>
@@ -457,13 +517,11 @@ const IntroBranding = () => {
                         <p className="own_typo_p"> 나만의 휴식을 <br/> 소유하다 </p>
                         <span className="own_typo_white">PRETENDARD 프리텐다드 </span>
                     </div>
-                    <div> 
-                        <span> Type Korean - pretendard </span>
-                        <p> 가 </p>
+                    <div>
+                        <img src={Typo_Kimg} />
                     </div>
                     <div>
-                        <p> Aa </p>
-                        <span> Type English - Poppins </span>
+                    <img src={Typo_Eimg} />
                     </div>
                     <div> 
                         <p className="own_typo_p"> REST WITH OWN </p>
@@ -495,15 +553,20 @@ const IntroBranding = () => {
                     <HeadText> OWN METAPO </HeadText>
                 </OwnMetapoText>
                 <OwnMetapo>
-                    <div> <img src={Metapo_obj_o1} /> <p> </p> </div>
-                    <div> <img src={Metapo_obj_v2} /> <p> </p> </div>
-                    <div> <p> </p></div>
-                    <div> <img src={Metapo_obj_c4} /> <p> </p> </div>
+                    <div> <img src={Metapo_obj_1} /> <p> ONE DAY </p> </div>
+                    <div> <img src={Metapo_obj_2} /> <p> VACATION </p> </div>
+                    <div> <p className="metapo_text"> 오운의 메타포는 각 키트 테마의 형상을
+                                본 뜬 형태로 제작되었습니다. 메타포를 
+                                사용함으로써 각 테마의 의미를 더 
+                                명확하게 해주고, 사용자들에게 친근하게 
+                                다가갈 수 있습니다.  </p>
+                    </div>
+                    <div> <img src={Metapo_obj_4} /> <p> CREATIVE </p> </div>
                     <div> </div>
-                    <div> <img src={Metapo_obj_g6} /> <p> </p> </div>
+                    <div> <img src={Metapo_obj_6} /> <p> GAME </p> </div>
                     <div> </div>
-                    <div> <img src={Metapo_obj_s8} /> <p> </p> </div>
-                    <div> <img src={Metapo_obj_r9} /> <p> </p> </div>
+                    <div> <img src={Metapo_obj_8} /> <p> SPOT </p> </div>
+                    <div> <img src={Metapo_obj_9} /> <p> RANDOM </p> </div>
                 </OwnMetapo>
             </OwnMetapoWrap>
             <OwnMockWrap>
