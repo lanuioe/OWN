@@ -1,10 +1,8 @@
-import { useRef, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 
-export function useHorizontalScroll(scrollSpeed = 1) {
-  const elRef = useRef();
-
+export function useHorizontalScroll(ref, scrollSpeed = 1) {
   useLayoutEffect(() => {
-    const el = elRef.current;
+    const el = ref.current;
     if (!el) return;
 
     const onWheel = (e) => {
@@ -18,7 +16,5 @@ export function useHorizontalScroll(scrollSpeed = 1) {
     el.addEventListener("wheel", onWheel, { passive: false });
 
     return () => el.removeEventListener("wheel", onWheel, { passive: false });
-  }, [scrollSpeed]);
-
-  return elRef;
+  }, [ref, scrollSpeed]);
 }
