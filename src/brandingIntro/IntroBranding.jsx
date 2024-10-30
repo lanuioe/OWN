@@ -18,7 +18,7 @@ import Typo_K from '../assets/brandingIntro/typo_k.png'
 import Typo_E from '../assets/brandingIntro/typo_e.png'
 import Typo_Kimg from '../assets/brandingIntro/typo_kk.png'
 import Typo_Eimg from '../assets/brandingIntro/typo_ee.png'
-import Intro_logo from '../assets/brandingIntro/own_logo_intro.png'
+import Intro_logo from '../assets/brandingIntro/Intro_logo.png'
 import Own_logo_1 from '../assets/brandingIntro/own_logo_1.png'
 import Own_logo_2 from '../assets/brandingIntro/own_logo_2.png'
 import Own_logo_3 from '../assets/brandingIntro/own_logo_3.png'
@@ -44,10 +44,11 @@ import OwnInsta from '../assets/brandingIntro/own_insta.png'
 import OwnMockup from '../assets/brandingIntro/own_mockup.png'
 
 import IntroMainBg from '../assets/brandingIntro/introMainBg.gif'
+import TiredOfLifeRelaxGif from '../assets/brandingIntro/TiredOfLifeRelaxGif.gif'
 
 
 const IntroBrandingWrap = styled.div`
-    margin: 0 10.2vw;
+    margin: 7.29vw 10.2vw 0 10.2vw;
     position: relative;
     div.intro_main_bg{
         position: absolute;
@@ -176,18 +177,30 @@ const TiredLifeRelaxWrap = styled.div`
     background-size: cover;
     color: ${colors.smallBlack};
     padding: 17.39vw 10.42vw 0 10.42vw ;
+    position: relative;
+    img{
+            position: absolute;
+            left: 1.56vw;
+            top: 3vw;
+        }
     p{
         font-size: 6.25vw;
+        line-height: 9.06vw;
+        text-align: right;
+        font-weight: 500;
         span{
             font-size: 6.25vw; 
             margin-right: 4.47vw;
         }
     }
-    p.orange_type{
-        text-align: right;
+    p.orange_typo{
+        color: ${colors.mainOrange};
+
     }
+    p.align_left{ text-align: left;}
     span.tired_relax_k{
-        font-size:${fontSize.kSizeText};
+        margin-top: 2.91vw;
+        font-size:${fontSize.kSizeText20};
         display: block; 
         text-align: center;
     }
@@ -290,7 +303,7 @@ const OwnTypo = styled.div`
         padding: 5.88vw 0 9.68vw 4.58vw;
     }
     div:nth-child(2){
-        padding: 5.99vw 4.58vw 3.125vw 3.33vw;
+        padding: 5.99vw 4.58vw 2.44vw 3.33vw;
         background-color: ${colors.mainIvory};
     }
     div:nth-child(3){
@@ -333,7 +346,7 @@ const OwnLogoWrap = styled.div`
         width: 100%;
         height: 38.54vw;
         background-image: url(${Intro_logo});
-        background-size: auto;
+        background-size: cover;
     }
 `
 
@@ -358,15 +371,20 @@ const OwnLogoImgWrap = styled.div`
 
 const OwnMetapoWrap = styled.div`
     margin-top: 42.7vw;
+    padding: 0 2.96vw;
 `
 const OwnMetapoText = styled.div`
     display: flex;
     gap: 2.96vw;
+    padding: 0 4.79vw;
 `
 const OwnMetapo = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.93vw;
+    img:hover{
+            transform: rotate(-360deg);
+        }
     p.metapo_text{
         width: 20.4vw;
         font-size: ${fontSize.kSizeText20};
@@ -375,13 +393,13 @@ const OwnMetapo = styled.div`
         color: ${colors.smallBlack};
     }
     div{
-        width: 30.46vw;
-        height: 30.46vw;
+        height: 30.4vw;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 1.82vw;
+        background-size: cover;
         p{
             font-size: 2.6vw;
             font-weight: 700;
@@ -390,7 +408,9 @@ const OwnMetapo = styled.div`
         }
         img{
             max-width: 15.88vw;
-        }
+            transition: transform 1.5s ease-in-out;
+        }    
+
     }
     div:nth-child(1){ background-image: url(${Metapo_bg_1})};
     div:nth-child(2){ background-image: url(${Metapo_bg_2})};
@@ -413,6 +433,7 @@ const OwnMockWrap = styled.div`
 
 const IntroBranding = () => {
 
+    /* 마우스 오버 시 백그라운드 이미지교체 */
     const [backgroundImage, setBackgroundImage] = useState('');
 
     // 각 색상에 따라 배경 이미지를 변경하는 함수
@@ -424,6 +445,7 @@ const IntroBranding = () => {
     const handleMouseLeave = () => {
         setBackgroundImage('');
     };
+
 
 
     return (
@@ -469,9 +491,10 @@ const IntroBranding = () => {
                 </CoreValueImg>
             </CoreValueWrap>
             <TiredLifeRelaxWrap>
+                <img src={TiredOfLifeRelaxGif} />
                 <p>WE HELP PEOPLE WHO ARE </p>
                 <p className="orange_typo"> TIRED OF LIFE RELAX </p>
-                <p> <span> AND, </span> FIND THEMSELVES.</p>
+                <p className="align_left"> <span> AND, </span> FIND THEMSELVES.</p>
                 <span className="tired_relax_k"> 우리는 삶에 지친 사람들이 휴식을 소유하며, 자신을 찾아나갈 수 있도록 돕습니다. </span>
             </TiredLifeRelaxWrap>
             <OwnColorWrap>
@@ -553,7 +576,7 @@ const IntroBranding = () => {
                     <HeadText> OWN METAPO </HeadText>
                 </OwnMetapoText>
                 <OwnMetapo>
-                    <div> <img src={Metapo_obj_1} /> <p> ONE DAY </p> </div>
+                    <div> <img src={Metapo_obj_1}/> <p> ONE DAY </p> </div>
                     <div> <img src={Metapo_obj_2} /> <p> VACATION </p> </div>
                     <div> <p className="metapo_text"> 오운의 메타포는 각 키트 테마의 형상을
                                 본 뜬 형태로 제작되었습니다. 메타포를 
