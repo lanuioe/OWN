@@ -58,6 +58,8 @@ export const TargetCircle = styled.div`
   text-align: center;
   letter-spacing: ${vwCalc(-0.96)};
   text-transform: uppercase;
+  transform: ${(props) => `rotate(${props.$rotation + 155}deg)`};
+  transition: transform 0.1s ease-out;
 `;
 
 export const TargetNum = styled.span`

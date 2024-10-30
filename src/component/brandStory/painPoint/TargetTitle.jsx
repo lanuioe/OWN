@@ -13,6 +13,7 @@ const TargetTitle = ({
   enTitleWord1,
   enTitleWord2,
   titleStyles = {},
+  $rotation,
 }) => {
   const {
     pretendard48MarginTop,
@@ -51,7 +52,11 @@ const TargetTitle = ({
         </SecondWord>
       </Poppins350>
 
-      <TargetCircle $top={targetCircleTop} $left={targetCircleLeft}>
+      <TargetCircle
+        $top={targetCircleTop}
+        $left={targetCircleLeft}
+        $rotation={$rotation}
+      >
         target.<TargetNum>0{targetNum}</TargetNum>
       </TargetCircle>
     </>

@@ -44,7 +44,7 @@ const needs = `현재는 알바로 생계를 이어나가고 있지만,
 아까워 자신의 잉여 시간을 생산성 있게 보내 
 미래에는 더 안정적이길 원합니다.`;
 
-const Target1 = () => {
+const Target1 = ({ $rotation }) => {
   const { targetNum, koTitle, enTitleWord1, enTitleWord2 } = info;
   return (
     <Section $paddingRight={464}>
@@ -54,6 +54,7 @@ const Target1 = () => {
         enTitleWord1={enTitleWord1}
         enTitleWord2={enTitleWord2}
         titleStyles={titleStyles}
+        $rotation={$rotation}
       />
       <TargetContent
         images={images}

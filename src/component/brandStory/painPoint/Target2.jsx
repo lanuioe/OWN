@@ -53,7 +53,7 @@ const needs = `삶에 지쳐 무의식적으로 일과 휴식의
 자체에도 불안함을 느껴 어떤
 방식으로 쉬는 건지 어려워합니다.`;
 
-const Target2 = () => {
+const Target2 = ({ $rotation }) => {
   const { targetNum, koTitle, enTitleWord1, enTitleWord2 } = info;
   return (
     <Section $paddingRight={500}>
@@ -63,6 +63,7 @@ const Target2 = () => {
         enTitleWord1={enTitleWord1}
         enTitleWord2={enTitleWord2}
         titleStyles={titleStyles}
+        $rotation={$rotation}
       />
       <TargetContent
         images={images}
