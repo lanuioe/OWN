@@ -8,7 +8,7 @@ import line from "../../assets/icon/line_drawing_insight.gif";
 import ownStar from "../../assets/icon/ownStar_orange_fill.svg";
 
 const MAIN_ORANGE = colors.mainOrange;
-const IVORY = colors.mainIvory;
+const MAIN_IVORY = colors.mainIvory;
 const WHITE = "#ffffff";
 
 const Wrapper = styled.div`
@@ -23,7 +23,7 @@ const EnWrapper = styled.div`
 `;
 
 const Poppins120 = styled(BasePoppins100)`
-  color: ${IVORY};
+  color: ${MAIN_IVORY};
   font-size: ${vwCalc(120)};
   font-weight: 500;
 `;

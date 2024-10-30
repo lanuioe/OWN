@@ -56,23 +56,27 @@ const OwnStarImgBox = styled(ImgBox)`
   right: ${vwCalc(187)};
 `;
 
-const Target3 = () => {
+const Target3 = ({ $rotation }) => {
   const { targetNum, koTitle, enTitleWord1, enTitleWord2 } = info;
+
   return (
-    <Section paddingRight={904}>
+    <Section $paddingRight={904}>
       <TargetTitle
         targetNum={targetNum}
         koTitle={koTitle}
         enTitleWord1={enTitleWord1}
         enTitleWord2={enTitleWord2}
         titleStyles={titleStyles}
+        $rotation={$rotation}
       />
+
       <TargetContent
         images={images}
         painPoint={painPoint}
         needs={needs}
         contentStyles={contentStyles}
       />
+
       <OwnStarImgBox
         src={ownStar}
         alt="OWN 별 아이콘 장식"

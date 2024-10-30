@@ -16,7 +16,7 @@ const Section = styled.section`
 
 const Flex = styled.div`
   display: flex;
-  gap: ${(props) => vwCalc(props.gap)};
+  gap: ${(props) => vwCalc(props.$gap)};
 `;
 
 const Poppins100 = styled(BasePoppins100)`
@@ -57,7 +57,7 @@ const SquareLink = styled(BaseShape).attrs({
   width: ${vwCalc(568)};
   height: ${vwCalc(473)};
   font-weight: 400;
-  background: ${(props) => props.background};
+  background: ${(props) => props.$background};
   border-radius: ${vwCalc(33)};
   text-align: center;
 `;
@@ -65,7 +65,7 @@ const SquareLink = styled(BaseShape).attrs({
 const Outro = ({ scrollToTop }) => {
   return (
     <Section>
-      <Flex gap={200}>
+      <Flex $gap={200}>
         <Poppins100>
           you can own <br />a rest and <br />
           find yourself
@@ -82,14 +82,14 @@ const Outro = ({ scrollToTop }) => {
         <ImgBox src={arrow} hideScreenReader={true} width={35} height={22} />
       </ScrollTopButton>
 
-      <Flex gap={27}>
-        <SquareLink to="/introbranding" background={`url(${branding})`}>
+      <Flex $gap={27}>
+        <SquareLink to="/introbranding" $background={`url(${branding})`}>
           branding
         </SquareLink>
-        <SquareLink to="/" background={colors.mainBlue}>
+        <SquareLink to="/" $background={colors.mainBlue}>
           service
         </SquareLink>
-        <SquareLink to="/" background={colors.mainOrange}>
+        <SquareLink to="/" $background={colors.mainOrange}>
           analog
         </SquareLink>
       </Flex>

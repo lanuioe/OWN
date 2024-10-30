@@ -113,7 +113,11 @@ const SoundButton = () => {
         <audio src={music} />
         <SoundWave>
           {[...Array(7)].map((_, index) => (
-            <SoundWaveItem key={index} isAnimating={isPlaying} index={index} />
+            <SoundWaveItem
+              key={index}
+              $isAnimating={isPlaying}
+              $index={index}
+            />
           ))}
         </SoundWave>
       </SoundBtn>

@@ -14,14 +14,14 @@ const Poppins150 = styled(BasePoppins150)`
 
 const Word = styled.span`
   position: absolute;
-  top: ${(props) => vwCalc(props.top)};
-  left: ${(props) => vwCalc(props.left)};
+  top: ${(props) => vwCalc(props.$top)};
+  left: ${(props) => vwCalc(props.$left)};
 `;
 
 const NeedsImgBox = styled(ImgBox)`
   position: absolute;
-  top: ${(props) => vwCalc(props.top)};
-  left: ${(props) => vwCalc(props.left)};
+  top: ${(props) => vwCalc(props.$top)};
+  left: ${(props) => vwCalc(props.$left)};
 `;
 
 const Pretendard20 = styled(BasePretendard20)`
@@ -68,7 +68,7 @@ const Needs = () => {
     <>
       <Poppins150>
         {words.map((word, index) => (
-          <Word key={index} top={word.top} left={word.left}>
+          <Word key={index} $top={word.top} $left={word.left}>
             {word.text}
           </Word>
         ))}
@@ -81,8 +81,8 @@ const Needs = () => {
           alt={image.alt}
           width={image.width}
           height={image.height}
-          top={image.top}
-          left={image.left}
+          $top={image.top}
+          $left={image.left}
         />
       ))}
 
@@ -90,7 +90,7 @@ const Needs = () => {
         "그들에게 가장 필요한 것은 무엇일까?" 라는 고민 끝에
       </Pretendard20>
 
-      <NeedsImgBox src={line} hideScreenReader={true} top={0} left={0} />
+      <NeedsImgBox src={line} hideScreenReader={true} $top={0} $left={0} />
     </>
   );
 };

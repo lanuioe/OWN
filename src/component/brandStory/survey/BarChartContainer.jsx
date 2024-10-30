@@ -2,7 +2,7 @@ import { useState } from "react";
 import useIntersectionObserverRef from "../../../hook/useIntersectionObserverRef";
 import BarChart from "./BarChart";
 
-const BarChartContainer = ({ color, targetHeight, children }) => {
+const BarChartContainer = ({ color, $targetHeight, children }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const ref = useIntersectionObserverRef({
@@ -18,8 +18,8 @@ const BarChartContainer = ({ color, targetHeight, children }) => {
     <BarChart
       ref={ref}
       color={color}
-      targetHeight={targetHeight}
-      isVisible={isVisible}
+      $targetHeight={$targetHeight}
+      $isVisible={isVisible}
     >
       {children}
     </BarChart>

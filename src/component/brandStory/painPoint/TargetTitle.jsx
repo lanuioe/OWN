@@ -13,6 +13,7 @@ const TargetTitle = ({
   enTitleWord1,
   enTitleWord2,
   titleStyles = {},
+  $rotation,
 }) => {
   const {
     pretendard48MarginTop,
@@ -29,28 +30,33 @@ const TargetTitle = ({
   return (
     <>
       <Pretendard48
-        marginTop={pretendard48MarginTop}
-        marginLeft={pretendard48MarginLeft}
+        as="div"
+        $marginTop={pretendard48MarginTop}
+        $marginLeft={pretendard48MarginLeft}
       >
         &#40;0{targetNum}&#41; {koTitle} &#45; {enTitleWord1} {enTitleWord2}
       </Pretendard48>
 
-      <Poppins350 top={poppins350Top}>
+      <Poppins350 as="div" $top={poppins350Top}>
         <FirstWord
-          marginTop={firstWordMarginTop}
-          marginLeft={firstWordMarginLeft}
+          $marginTop={firstWordMarginTop}
+          $marginLeft={firstWordMarginLeft}
         >
           {enTitleWord1}
         </FirstWord>
         <SecondWord
-          marginTop={secondWordMarginTop}
-          marginLeft={secondWordMarginLeft}
+          $marginTop={secondWordMarginTop}
+          $marginLeft={secondWordMarginLeft}
         >
           {enTitleWord2}
         </SecondWord>
       </Poppins350>
 
-      <TargetCircle top={targetCircleTop} left={targetCircleLeft}>
+      <TargetCircle
+        $top={targetCircleTop}
+        $left={targetCircleLeft}
+        $rotation={$rotation}
+      >
         target.<TargetNum>0{targetNum}</TargetNum>
       </TargetCircle>
     </>

@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import normalize from 'styled-normalize';
+import { createGlobalStyle } from "styled-components";
+import normalize from "styled-normalize";
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -10,14 +10,7 @@ const GlobalStyle = createGlobalStyle`
   // 전역 스타일
   * {
     box-sizing: border-box;
-    font-family: 'Pretendard';
   }
-
-  @font-face {
-    font-family: 'Pretendard';
-    src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.7/dist/web/static/pretendard-dynamic-subset.css");
-    font-style: normal;
-}
 
   a {
     text-decoration: none;

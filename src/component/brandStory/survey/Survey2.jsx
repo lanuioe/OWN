@@ -54,7 +54,7 @@ const Survey2 = () => {
           <BarChartContainer
             key={index}
             color={data.color}
-            targetHeight={data.targetHeight}
+            $targetHeight={data.targetHeight}
             label={data.label}
           />
         ))}

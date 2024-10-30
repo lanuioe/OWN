@@ -18,10 +18,10 @@ const BarChart = styled.li`
   text-align: center;
   text-transform: uppercase;
 
-  ${({ targetHeight, isVisible }) =>
-    isVisible &&
+  ${({ $targetHeight, $isVisible }) =>
+    $isVisible &&
     css`
-      animation: ${increaseGraph(targetHeight)} 2s ease-out forwards;
+      animation: ${increaseGraph($targetHeight)} 2s ease-out forwards;
     `}
 `;
 

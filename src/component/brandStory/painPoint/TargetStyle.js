@@ -6,14 +6,14 @@ import { BasePoppins } from "../../style/BasePoppins";
 
 export const Section = styled.section`
   position: relative;
-  padding-right: ${(props) => vwCalc(props.paddingRight) || 0};
+  padding-right: ${(props) => vwCalc(props.$paddingRight) || 0};
 `;
 
 /* ------- TargetTitle 스타일 */
 
 export const Pretendard48 = styled(BasePretendard)`
-  margin-top: ${(props) => vwCalc(props.marginTop) || 0};
-  margin-left: ${(props) => vwCalc(props.marginLeft) || 0};
+  margin-top: ${(props) => vwCalc(props.$marginTop) || 0};
+  margin-left: ${(props) => vwCalc(props.$marginLeft) || 0};
   font-family: "Pretendard";
   font-size: ${vwCalc(48)};
   color: ${colors.bigBlack};
@@ -24,7 +24,7 @@ export const Pretendard48 = styled(BasePretendard)`
 
 export const Poppins350 = styled(BasePoppins)`
   position: absolute;
-  top: ${(props) => vwCalc(props.top) || 0};
+  top: ${(props) => vwCalc(props.$top) || 0};
   font-size: ${vwCalc(350)};
   color: #f0f0f0;
   text-transform: uppercase;
@@ -34,19 +34,19 @@ export const Poppins350 = styled(BasePoppins)`
 `;
 
 export const FirstWord = styled.div`
-  margin-top: ${(props) => vwCalc(props.marginTop || 0)};
-  margin-left: ${(props) => vwCalc(props.marginLeft || 0)};
+  margin-top: ${(props) => vwCalc(props.$marginTop || 0)};
+  margin-left: ${(props) => vwCalc(props.$marginLeft || 0)};
 `;
 
 export const SecondWord = styled.div`
-  margin-top: ${(props) => vwCalc(props.marginTop || 0)};
-  margin-left: ${(props) => vwCalc(props.marginLeft || 0)};
+  margin-top: ${(props) => vwCalc(props.$marginTop || 0)};
+  margin-left: ${(props) => vwCalc(props.$marginLeft || 0)};
 `;
 
 export const TargetCircle = styled.div`
   position: absolute;
-  top: ${(props) => vwCalc(props.top || 0)};
-  left: ${(props) => vwCalc(props.left || 0)};
+  top: ${(props) => vwCalc(props.$top || 0)};
+  left: ${(props) => vwCalc(props.$left || 0)};
   padding-top: ${vwCalc(131)};
   width: ${vwCalc(300)};
   height: ${vwCalc(300)};
@@ -58,6 +58,8 @@ export const TargetCircle = styled.div`
   text-align: center;
   letter-spacing: ${vwCalc(-0.96)};
   text-transform: uppercase;
+  transform: ${(props) => `rotate(${props.$rotation + 155}deg)`};
+  transition: transform 0.1s ease-out;
 `;
 
 export const TargetNum = styled.span`
@@ -68,26 +70,26 @@ export const TargetNum = styled.span`
 
 export const Flex = styled.div`
   display: flex;
-  gap: ${(props) => vwCalc(props.gap || 50)};
-  flex-direction: ${(props) => (props.col ? "column" : "row")};
+  gap: ${(props) => vwCalc(props.$gap || 50)};
+  flex-direction: ${(props) => (props.$col ? "column" : "row")};
 `;
 
 export const ImgBoxWrapper = styled.div`
   display: flex;
-  margin-top: ${(props) => vwCalc(props.marginTop || 0)};
-  margin-left: ${(props) => vwCalc(props.marginLeft || 0)};
-  gap: ${(props) => vwCalc(props.gap || 50)};
-  flex-direction: ${(props) => (props.col ? "column" : `row`)};
-  ${(props) => (props.col ? "align-items: flex-end" : ``)};
+  margin-top: ${(props) => vwCalc(props.$marginTop || 0)};
+  margin-left: ${(props) => vwCalc(props.$marginLeft || 0)};
+  gap: ${(props) => vwCalc(props.$gap || 50)};
+  flex-direction: ${(props) => (props.$col ? "column" : `row`)};
+  ${(props) => (props.$col ? "align-items: flex-end" : ``)};
 `;
 
 export const TextWrapper = styled.section`
   display: flex;
   width: max-content;
-  margin-top: ${(props) => vwCalc(props.marginTop || 0)};
-  margin-left: ${(props) => vwCalc(props.marginLeft || 0)};
-  gap: ${(props) => vwCalc(props.gap || 0)};
-  flex-direction: ${(props) => (props.col ? `column` : "row")};
+  margin-top: ${(props) => vwCalc(props.$marginTop || 0)};
+  margin-left: ${(props) => vwCalc(props.$marginLeft || 0)};
+  gap: ${(props) => vwCalc(props.$gap || 0)};
+  flex-direction: ${(props) => (props.$col ? `column` : "row")};
 `;
 
 export const Description = styled(BasePretendard26)`

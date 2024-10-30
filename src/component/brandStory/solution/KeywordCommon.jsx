@@ -23,9 +23,9 @@ const Poppins150 = styled(BasePoppins150)`
 
 const KeywordImgBox = styled(ImgBox)`
   position: absolute;
-  top: ${(props) => vwCalc(props.top)};
-  left: ${(props) => vwCalc(props.left)};
-  opacity: ${(props) => (props.isHovering ? 1 : 0)};
+  top: ${(props) => vwCalc(props.$top)};
+  left: ${(props) => vwCalc(props.$left)};
+  opacity: ${(props) => (props.$isHovering ? 1 : 0)};
   transition: opacity 0.3s ease-in-out;
 `;
 
@@ -48,9 +48,9 @@ const KeywordCommon = ({ keyword, images = [] }) => {
           alt={images.alt}
           width={images.width}
           height={images.height}
-          top={images.top}
-          left={images.left}
-          isHovering={isHovering}
+          $top={images.top}
+          $left={images.left}
+          $isHovering={isHovering}
         />
       ))}
     </>

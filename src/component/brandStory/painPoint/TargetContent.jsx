@@ -17,12 +17,12 @@ const TargetContent = ({ images, painPoint, needs, contentStyles = {} }) => {
   } = contentStyles;
 
   return (
-    <Flex gap={flexGap} col={flexCol}>
+    <Flex $gap={flexGap} $col={flexCol}>
       <ImgBoxWrapper
-        gap={imgBoxWrapperGap}
-        col={imgBoxWrapperCol}
-        marginTop={imgBoxWrapperMarginTop}
-        marginLeft={imgBoxWrapperMarginLeft}
+        $gap={imgBoxWrapperGap}
+        $col={imgBoxWrapperCol}
+        $marginTop={imgBoxWrapperMarginTop}
+        $marginLeft={imgBoxWrapperMarginLeft}
       >
         {images.map((img, index) => (
           <ImgBox
@@ -36,10 +36,10 @@ const TargetContent = ({ images, painPoint, needs, contentStyles = {} }) => {
       </ImgBoxWrapper>
 
       <TextWrapper
-        gap={textWrapperGap}
-        col={textWrapperCol}
-        marginTop={textWrapperMarginTop}
-        marginLeft={textWrapperMarginLeft}
+        $gap={textWrapperGap}
+        $col={textWrapperCol}
+        $marginTop={textWrapperMarginTop}
+        $marginLeft={textWrapperMarginLeft}
       >
         <dl>
           <BasePretendard35 as="dt">Pain point</BasePretendard35>
