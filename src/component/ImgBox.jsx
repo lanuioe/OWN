@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import vwCalc from "../util/vwCalc";
 
-const Figure = styled.div`
+const Figure = styled.figure`
   width: ${(props) => (props.width ? vwCalc(props.width) : "auto")};
   height: ${(props) => (props.height ? vwCalc(props.height) : "auto")};
 `;

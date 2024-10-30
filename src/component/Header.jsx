@@ -77,16 +77,16 @@ const Header = () => {
       <ContentListWrap color={color}>
         <HeaderContentList color={color}>
           <li>
-            <Link to="/introbranding">ABOUT</Link>
+            <Link to="/introbranding">BRANDING</Link>
           </li>
           <li>
-            <Link to="/">BRANDING</Link>
-          </li>
-          <li>
-            <Link to="/">SERVICE</Link>
+            <Link to="/appservice">SERVICE</Link>
           </li>
           <li>
             <Link to="/">ANALOG</Link>
+          </li>
+          <li>
+            <Link to="/sticker">POSTCARD</Link>
           </li>
         </HeaderContentList>
       </ContentListWrap>

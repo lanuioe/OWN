@@ -2,9 +2,10 @@ import "./App.css";
 import { Reset } from "styled-reset";
 import { BrowserRouter } from "react-router-dom";
 import GlobalStyle from "./GlobalStyle";
-import Header from "./component/Header";
-import Router from "./Router";
 import { ColorProvider } from "./ColorContext";
+import Header from "./component/Header";
+import Footer from "./component/Footer";
+import Router from "./Router";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Reset />
         <Header />
         <Router />
+        <Footer />
       </BrowserRouter>
     </ColorProvider>
   );
