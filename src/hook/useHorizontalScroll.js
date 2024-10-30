@@ -15,9 +15,9 @@ export function useHorizontalScroll(scrollSpeed = 1) {
       });
     };
 
-    el.addEventListener("wheel", onWheel);
+    el.addEventListener("wheel", onWheel, { passive: false });
 
-    return () => el.removeEventListener("wheel", onWheel);
+    return () => el.removeEventListener("wheel", onWheel, { passive: false });
   }, [scrollSpeed]);
 
   return elRef;

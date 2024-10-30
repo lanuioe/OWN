@@ -7,7 +7,7 @@ import useIntersectionObserverRef from "../../../hook/useIntersectionObserverRef
 
 const Poppins120 = styled(BasePoppins100)`
   display: block;
-  margin-top: ${(props) => vwCalc(props.marginTop) || 0};
+  margin-top: ${(props) => vwCalc(props.$marginTop) || 0};
   font-size: ${vwCalc(120)};
   text-transform: uppercase;
 `;
@@ -38,7 +38,7 @@ const SurveyTitle = ({ title, percentage, marginTop }) => {
 
   return (
     <div ref={ref}>
-      <Poppins120 marginTop={marginTop}>{title}</Poppins120>
+      <Poppins120 $marginTop={marginTop}>{title}</Poppins120>
       <Poppins230>{animatedPercentage}%</Poppins230>
     </div>
   );

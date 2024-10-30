@@ -47,7 +47,7 @@ const needs = `현재는 알바로 생계를 이어나가고 있지만,
 const Target1 = () => {
   const { targetNum, koTitle, enTitleWord1, enTitleWord2 } = info;
   return (
-    <Section paddingRight={464}>
+    <Section $paddingRight={464}>
       <TargetTitle
         targetNum={targetNum}
         koTitle={koTitle}

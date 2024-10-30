@@ -59,7 +59,7 @@ const OwnStarImgBox = styled(ImgBox)`
 const Target3 = () => {
   const { targetNum, koTitle, enTitleWord1, enTitleWord2 } = info;
   return (
-    <Section paddingRight={904}>
+    <Section $paddingRight={904}>
       <TargetTitle
         targetNum={targetNum}
         koTitle={koTitle}

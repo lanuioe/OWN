@@ -13,7 +13,7 @@ const MAIN_ORANGE = colors.mainOrange;
 
 const HeaderWrap = styled.header`
   display: flex;
-  position: ${(props) => (props.isRoot ? "absolute" : "fixed")};
+  position: ${(props) => (props.$isRoot ? "absolute" : "fixed")};
   padding: ${vwCalc(37)} ${vwCalc(80)} 0;
   top: 0;
   width: 100vw;
@@ -21,13 +21,13 @@ const HeaderWrap = styled.header`
   justify-content: space-between;
   align-items: center;
   z-index: 10;
-  color: ${(props) => props.color};
+  color: ${(props) => props.$color};
 `;
 
 const ContentListWrap = styled.div`
   padding: ${vwCalc(12)} 0;
   width: ${vwCalc(792)};
-  border: ${vwCalc(1)} solid ${(props) => props.color};
+  border: ${vwCalc(1)} solid ${(props) => props.$color};
   border-radius: ${vwCalc(45)};
 `;
 
@@ -40,7 +40,7 @@ const HeaderContentList = styled.ol`
 
   li {
     font-size: 1.25vw;
-    color: ${(props) => props.color};
+    color: ${(props) => props.$color};
   }
   li:hover {
     font-weight: 600;
@@ -70,12 +70,12 @@ const Header = () => {
   }, [location.pathname, setColor]);
 
   return (
-    <HeaderWrap isRoot={isRoot} color={color}>
+    <HeaderWrap $isRoot={isRoot} $color={color}>
       <Link to="/">
         <ImgBox src={Logo} alt="OWN 로고" width={110} height={33} />
       </Link>
-      <ContentListWrap color={color}>
-        <HeaderContentList color={color}>
+      <ContentListWrap $color={color}>
+        <HeaderContentList $color={color}>
           <li>
             <Link to="/introbranding">BRANDING</Link>
           </li>

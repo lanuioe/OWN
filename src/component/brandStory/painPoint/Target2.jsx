@@ -56,7 +56,7 @@ const needs = `삶에 지쳐 무의식적으로 일과 휴식의
 const Target2 = () => {
   const { targetNum, koTitle, enTitleWord1, enTitleWord2 } = info;
   return (
-    <Section paddingRight={500}>
+    <Section $paddingRight={500}>
       <TargetTitle
         targetNum={targetNum}
         koTitle={koTitle}

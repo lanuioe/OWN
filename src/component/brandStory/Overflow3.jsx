@@ -36,7 +36,7 @@ const CircleImgBox = styled(ImgBox)`
   position: absolute;
   top: 0;
   opacity: 0;
-  animation: ${({ isVisible }) => isVisible && fadeIn} 0.5s ease-in forwards;
+  animation: ${(props) => props.$isVisible && fadeIn} 0.5s ease-in forwards;
 `;
 
 const Overflow3 = () => {
@@ -68,7 +68,7 @@ const Overflow3 = () => {
           alt="원 깨지는 모션"
           width={1920}
           height={1080}
-          isVisible={isVisible}
+          $isVisible={isVisible}
         />
       )}
     </section>
