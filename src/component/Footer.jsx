@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import ImgBox from "./ImgBox";
+import { useLocation } from "react-router-dom";
 import { colors } from "../styles";
 import vwCalc from "../util/vwCalc";
 import { BasePretendard20 } from "./style/BasePretendard";
+import ImgBox from "./ImgBox";
 import logoOrange from "../assets/logo/own_logo.svg";
 import logoWhite from "../assets/logo/own_logo_white.svg";
-import { useLocation } from "react-router-dom";
 
 const MAIN_ORANGE = colors.mainOrange;
 const MAIN_IVORY = colors.mainIvory;
@@ -71,8 +71,8 @@ const FooterWrapper = styled.footer`
   padding: ${vwCalc(85)} ${PADDING_SIDE} ${vwCalc(56)};
   width: 100%;
   height: ${vwCalc(476)};
-  background-color: ${(props) => props.bgColor || MAIN_ORANGE};
-  color: ${(props) => props.color || MAIN_IVORY};
+  background-color: ${(props) => props.$bgColor || MAIN_ORANGE};
+  color: ${(props) => props.$color || MAIN_IVORY};
   font-family: Pretendard;
   font-size: ${vwCalc(17)};
 
@@ -99,7 +99,7 @@ const Title = styled.li`
   margin-bottom: ${vwCalc(30)};
   font-size: ${vwCalc(22)};
   font-weight: 500;
-  color: ${(props) => props.titleColor || WHITE};
+  color: ${(props) => props.$titleColor || WHITE};
 `;
 
 const Line = styled.span`
@@ -111,7 +111,7 @@ const CopyRightWrapper = styled.div`
   margin-top: ${vwCalc(210)};
   padding-top: ${vwCalc(32)};
   width: 100%;
-  border-top: ${vwCalc(1)} solid ${(props) => props.color || MAIN_IVORY};
+  border-top: ${vwCalc(1)} solid ${(props) => props.$color || MAIN_IVORY};
   justify-content: space-between;
 `;
 
@@ -137,14 +137,14 @@ const Footer = () => {
 
   return (
     <>
-      <FooterWrapper bgColor={bgColor} color={color}>
+      <FooterWrapper $bgColor={bgColor} $color={color}>
         <ImgBox src={logo} alt="OWN 로고" width={96} height={28} />
-        <BasePretendard20 color={color}>Own your own rest.</BasePretendard20>
+        <BasePretendard20 $color={color}>Own your own rest.</BasePretendard20>
 
         <Flex>
           {footerData.map((section, index) => (
             <Ul key={index}>
-              <Title titleColor={titleColor}>{section.title}</Title>
+              <Title $titleColor={titleColor}>{section.title}</Title>
               {section.items.map((item, idx) => (
                 <li key={idx}>
                   <span>{item.name}</span>

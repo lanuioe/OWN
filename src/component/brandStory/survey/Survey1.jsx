@@ -65,7 +65,7 @@ const RedCircle = styled(CircleBase)`
   bottom: ${vwCalc(-80)};
   background-color: ${MAIN_ORANGE};
 
-  animation: ${({ animate }) => (animate ? moveRedCircle : "none")} 2.8s
+  animation: ${(props) => (props.$animate ? moveRedCircle : "none")} 2.8s
     ease-in-out forwards;
 `;
 
@@ -76,7 +76,7 @@ const GrayCircle = styled(CircleBase)`
   bottom: ${vwCalc(-34)};
   background-color: ${GRAY};
 
-  animation: ${({ animate }) => (animate ? moveGrayCircle : "none")} 1.5s
+  animation: ${(props) => (props.$animate ? moveGrayCircle : "none")} 1.5s
     ease-in-out forwards;
 `;
 
@@ -109,8 +109,8 @@ const Survey1 = () => {
           participantNum="1,542"
         />
       </Section>
-      <RedCircle ref={redCircleRef} animate={redCircleVisible} />
-      <GrayCircle ref={grayCircleRef} animate={grayCircleVisible} />
+      <RedCircle ref={redCircleRef} $animate={redCircleVisible} />
+      <GrayCircle ref={grayCircleRef} $animate={grayCircleVisible} />
     </Wrapper>
   );
 };

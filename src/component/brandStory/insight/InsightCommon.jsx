@@ -16,7 +16,7 @@ const Section = styled.section`
   border-right: 1px solid ${GRAY};
 
   &:hover {
-    background-image: url(${(props) => props.image});
+    background-image: url(${(props) => props.$image});
     background-size: cover;
     cursor: pointer;
   }
@@ -55,7 +55,7 @@ const InsightCommon = ({ num, enParagraph, koParagraph }) => {
   return (
     <>
       <li>
-        <Section image={imagePath}>
+        <Section $image={imagePath}>
           <H3>insight 0{num}</H3>
           <TextWrapper>
             <Pretendard35>{enParagraph}</Pretendard35>

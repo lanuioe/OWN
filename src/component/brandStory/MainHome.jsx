@@ -21,8 +21,8 @@ const Strong = styled.span`
 `;
 
 const TextPos = styled.div`
-  margin-left: ${(props) => vwCalc(props.marginLeft) || 0};
-  padding-top: ${(props) => vwCalc(props.paddingTop) || 0};
+  margin-left: ${(props) => vwCalc(props.$marginLeft) || 0};
+  padding-top: ${(props) => vwCalc(props.$paddingTop) || 0};
 `;
 
 const ServiceIntroduction = styled.p`
@@ -74,8 +74,8 @@ const MainHome = ({ color, backgroundImage }) => {
           ({ text, marginLeft, paddingTop, isStrong, isInline }, index) => (
             <TextPos
               key={index}
-              marginLeft={marginLeft}
-              paddingTop={paddingTop}
+              $marginLeft={marginLeft}
+              $paddingTop={paddingTop}
               as={isInline ? "span" : "div"}
             >
               {isStrong ? <Strong>{text}</Strong> : text}
@@ -92,7 +92,7 @@ const MainHome = ({ color, backgroundImage }) => {
 
       <Flex>
         {keywordData.map((text, index) => (
-          <BasePretendard20 key={index} as="li" color={color}>
+          <BasePretendard20 key={index} as="li" $color={color}>
             {text}
           </BasePretendard20>
         ))}

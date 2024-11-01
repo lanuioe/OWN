@@ -28,6 +28,7 @@ import getRandomImage from "../util/getRandomImage";
 
 const MAIN_ORANGE = colors.mainOrange;
 const MAIN_IVORY = colors.mainIvory;
+const MAIN_BEIGE = colors.mainBeige;
 const SMALL_BLACK = colors.smallBlack;
 const WHITE = " #FFFFFF";
 
@@ -52,10 +53,11 @@ const backgroundColors = {
 
 const SectionWrapper = styled.div`
   position: relative;
-  overflow-y: ${(props) => (props.isScrollable ? "auto" : "hidden")};
+  overflow-x: ${(props) => (props.$isOverflowHidden ? "hidden" : "auto")};
+  overflow-y: ${(props) => (props.$isScrollable ? "auto" : "hidden")};
   height: 100vh;
   background-color: ${(props) =>
-    backgroundColors[props.index] || backgroundColors.default};
+    backgroundColors[props.$index] || backgroundColors.default};
 `;
 
 const StyledNavigation = styled.div`
@@ -66,17 +68,17 @@ const StyledNavigation = styled.div`
   .Navigation a {
     margin: ${vwCalc(16)} !important;
     padding: ${vwCalc(5.5)} !important;
-    background-color: ${colors.mainBeige} !important;
+    background-color: ${MAIN_BEIGE} !important;
     opacity: 0.6;
 
     &:hover {
-      background-color: ${colors.mainOrange} !important;
+      background-color: ${MAIN_ORANGE} !important;
       opacity: 1;
     }
   }
 
   .Navigation a[style*="scale"] {
-    background-color: ${colors.mainOrange} !important;
+    background-color: ${MAIN_ORANGE} !important;
     opacity: 1;
   }
 `;
@@ -116,7 +118,7 @@ const BrandStory = () => {
       ),
     },
     { content: <Overflow1 /> },
-    { content: <Overflow2 /> },
+    { content: <Overflow2 />, isOverflowHidden: true },
     { content: <Overflow3 /> },
     { content: <Survey /> },
     { content: <Needs /> },
@@ -153,13 +155,14 @@ const BrandStory = () => {
   };
 
   return (
-    <StyledNavigation activeColor={colors.mainOrange}>
+    <StyledNavigation $activeColor={colors.mainOrange}>
       <SectionsContainer {...options} activeSection={initialActiveSection}>
         {sections.map((section, index) => (
           <Section key={index} className={`section${index + 1}`}>
             <SectionWrapper
-              index={index}
-              isScrollable={section.isScrollable || false}
+              $index={index}
+              $isOverflowHidden={section.isOverflowHidden || false}
+              $isScrollable={section.isScrollable || false}
             >
               {section.content}
             </SectionWrapper>

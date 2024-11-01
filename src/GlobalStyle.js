@@ -1,8 +1,26 @@
-import { createGlobalStyle } from 'styled-components';
-import normalize from 'styled-normalize';
+import { createGlobalStyle } from "styled-components";
+import normalize from "styled-normalize";
+import vwCalc from "./util/vwCalc";
+import { colors } from "./styles";
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
+
+  // 스크롤바 커스텀
+  ::-webkit-scrollbar {
+    width: ${vwCalc(6)};
+    height: ${vwCalc(6)};
+    border: ${vwCalc(1)} solid ${colors.mainIvory};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${colors.mainOrange};
+    border-radius: ${vwCalc(10)};
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: ${colors.mainBeige};
+  }
 
   :root {
     font-size: 10px;
@@ -10,14 +28,7 @@ const GlobalStyle = createGlobalStyle`
   // 전역 스타일
   * {
     box-sizing: border-box;
-    font-family: 'Pretendard';
   }
-
-  @font-face {
-    font-family: 'Pretendard';
-    src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.7/dist/web/static/pretendard-dynamic-subset.css");
-    font-style: normal;
-}
 
   a {
     text-decoration: none;

@@ -10,10 +10,11 @@ import { useColor } from "../ColorContext";
 import { colors } from "../styles";
 
 const MAIN_ORANGE = colors.mainOrange;
+const WHITE = "#FFFFFF";
 
 const HeaderWrap = styled.header`
   display: flex;
-  position: ${(props) => (props.isRoot ? "absolute" : "fixed")};
+  position: ${(props) => (props.$isRoot ? "absolute" : "fixed")};
   padding: ${vwCalc(37)} ${vwCalc(80)} 0;
   top: 0;
   width: 100vw;
@@ -21,13 +22,13 @@ const HeaderWrap = styled.header`
   justify-content: space-between;
   align-items: center;
   z-index: 10;
-  color: ${(props) => props.color};
+  color: ${(props) => props.$color};
 `;
 
 const ContentListWrap = styled.div`
   padding: ${vwCalc(12)} 0;
   width: ${vwCalc(792)};
-  border: ${vwCalc(1)} solid ${(props) => props.color};
+  border: ${vwCalc(1)} solid ${(props) => props.$color};
   border-radius: ${vwCalc(45)};
 `;
 
@@ -37,12 +38,13 @@ const HeaderContentList = styled.ol`
   align-items: center;
   padding: 0 ${vwCalc(56)};
   gap: ${vwCalc(60)};
+`;
 
-  li {
-    font-size: 1.25vw;
-    color: ${(props) => props.color};
-  }
-  li:hover {
+const ListItem = styled.li`
+  font-size: ${vwCalc(24)};
+  color: ${(props) => props.$color};
+  font-weight: ${(props) => (props.isActive ? 600 : 400)};
+  &:hover {
     font-weight: 600;
   }
 `;
@@ -54,7 +56,7 @@ const Header = () => {
   );
 
   const { color, setColor } = useColor();
-  let Logo = color === MAIN_ORANGE ? logoOrange : logoWhite;
+  const Logo = color === MAIN_ORANGE ? logoOrange : logoWhite;
 
   useEffect(() => {
     const isRootPath =
@@ -62,32 +64,51 @@ const Header = () => {
 
     setIsRoot(isRootPath);
 
-    if (!isRootPath) {
+    if (location.pathname === "/appservice") {
+      setColor(WHITE);
+    } else if (!isRootPath) {
       setColor(MAIN_ORANGE);
     }
 
     window.scrollTo(0, 0);
   }, [location.pathname, setColor]);
 
+  useEffect(() => {
+    if (location.pathname === "/appservice") {
+      const handleScroll = () => {
+        const threshold = window.innerHeight;
+        setColor(window.scrollY > threshold ? MAIN_ORANGE : WHITE);
+      };
+
+      window.addEventListener("scroll", handleScroll);
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
+  }, [location.pathname, setColor]);
+
+  const isActive = (path) => location.pathname === path;
+
   return (
-    <HeaderWrap isRoot={isRoot} color={color}>
+    <HeaderWrap $isRoot={isRoot} $color={color}>
       <Link to="/">
         <ImgBox src={Logo} alt="OWN 로고" width={110} height={33} />
       </Link>
-      <ContentListWrap color={color}>
-        <HeaderContentList color={color}>
-          <li>
+      <ContentListWrap $color={color}>
+        <HeaderContentList>
+          <ListItem isActive={isActive("/introbranding")} $color={color}>
             <Link to="/introbranding">BRANDING</Link>
-          </li>
-          <li>
+          </ListItem>
+          <ListItem isActive={isActive("/appservice")} $color={color}>
             <Link to="/appservice">SERVICE</Link>
-          </li>
-          <li>
-            <Link to="/">ANALOG</Link>
-          </li>
-          <li>
+          </ListItem>
+          <ListItem isActive={isActive("/analog")} $color={color}>
+            <Link to="/analog">ANALOG</Link>
+          </ListItem>
+          <ListItem isActive={isActive("/sticker")} $color={color}>
             <Link to="/sticker">POSTCARD</Link>
-          </li>
+          </ListItem>
         </HeaderContentList>
       </ContentListWrap>
       <SoundBtn />

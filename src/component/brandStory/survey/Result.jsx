@@ -4,10 +4,9 @@ import { colors } from "../../../styles";
 import { BasePoppins100 } from "../../style/BasePoppins";
 import { BasePretendard20 } from "../../style/BasePretendard";
 import ImgBox from "../../ImgBox";
-import OwnStar from "../../../assets/icon/ownStar_orange_big.svg";
+import ownStar from "../../../assets/icon/ownStar_orange_big.svg";
 
 const Section = styled.section`
-  // background-color: lightyellow;
   position: relative;
   padding-right: ${vwCalc(1048)};
 `;
@@ -68,7 +67,7 @@ const Result = () => {
       </BasePretendard20>
 
       <OwnStarImgBox
-        src={OwnStar}
+        src={ownStar}
         hideScreenReader={true}
         width={917}
         height={847}

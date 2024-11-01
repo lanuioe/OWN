@@ -25,8 +25,8 @@ const Poppins145 = styled(BasePoppins150)`
 `;
 
 const EnParagraph = styled(Poppins145)`
-  margin-top: ${(props) => vwCalc(props.marginTop)};
-  margin-left: ${(props) => vwCalc(props.marginLeft)};
+  margin-top: ${(props) => vwCalc(props.$marginTop)};
+  margin-left: ${(props) => vwCalc(props.$marginLeft)};
   margin-bottom: ${vwCalc(14)};
 `;
 
@@ -44,16 +44,16 @@ const Typo = () => {
   return (
     <Section>
       <H2>solution</H2>
-      <EnParagraph marginTop={4}>
+      <EnParagraph $marginTop={4}>
         with the <br />
         analog kit
       </EnParagraph>
-      <EnParagraph marginTop={208} marginLeft={1044}>
+      <EnParagraph $marginTop={208} $marginLeft={1044}>
         provided
       </EnParagraph>
-      <EnParagraph marginLeft={88}>once a month,</EnParagraph>
-      <EnParagraph marginLeft={152}>so that you can get</EnParagraph>
-      <EnParagraph marginLeft={542}>proper rest</EnParagraph>
+      <EnParagraph $marginLeft={88}>once a month,</EnParagraph>
+      <EnParagraph $marginLeft={152}>so that you can get</EnParagraph>
+      <EnParagraph $marginLeft={542}>proper rest</EnParagraph>
       <Wrapper>
         <ImgBox
           src={analog}
