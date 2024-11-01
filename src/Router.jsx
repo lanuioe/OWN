@@ -3,6 +3,7 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import BrandStory from "./component/BrandStory";
 import IntroBranding from "./brandingIntro/IntroBranding";
 import AppService from "./appservice/AppService";
+import NotFound from "./component/NotFound";
 
 const Router = () => {
   return (
