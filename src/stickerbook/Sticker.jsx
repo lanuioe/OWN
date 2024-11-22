@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState , useRef} from 'react';
 import styled from  'styled-components'
-import Draggable , { DraggableData }from 'react-draggable';
 import {colors, fontSize}  from '../styles'
 import { Sticker_BL1, Sticker_BL2, Sticker_BL3, Sticker_BL4, Sticker_BL5, Sticker_BL6,
-    Drawing_1, Drawing_2, Drawing_3, Drawing_4, Drawing_5, Drawing_6, Drawing_7, Drawing_8, Drawing_9, Drawing_10, Drawing_11, Drawing_12, Drawing_13, Drawing_14, Drawing_15, Drawing_16, Drawing_17, Drawing_18,
+    ele_1, ele_2, ele_3, ele_4, ele_5, ele_6, ele_7, ele_8, ele_9, ele_10, ele_11, ele_12, ele_13, ele_14, ele_15, ele_16, ele_17, ele_18,
     Ill_1 , Ill_2 ,Ill_3 ,Ill_4 ,Ill_5 ,Ill_6 ,Ill_7 ,Ill_8 ,Ill_9 ,Ill_10,Ill_11,Ill_12,Ill_13,Ill_14,Ill_15,Ill_16,Ill_17,Ill_18,Ill_B1,Ill_B2,Ill_B3,
     BodyTp_1 ,BodyTp_2, BodyTp_3, BodyTp_4, BodyTp_5, BodyTp_6, BodyTp_7, BodyTp_8, BodyTp_9,
     HeadTp_1, HeadTp_2, HeadTp_3, HeadTp_4, HeadTp_5, HeadTp_6 } 
 from './StickerImg'
 
+import Moveable from "react-moveable";
+import html2canvas from 'html2canvas';
+import FileSaver from './FileSaver';
 
 const CategoryText = styled.p`
     font-size: 1.45vw;
@@ -44,7 +46,7 @@ const DisplayGrid = styled.div`
 
 const StickerBoxWrap = styled.div`
     display: flex;
-    margin: 9.21vw 5.67vw 8.69vw 5.67vw;
+    margin: 9.21vw 5.67vw 1vw 5.67vw;
 `
 
 const ObjWrap = styled.div`
@@ -53,10 +55,20 @@ const ObjWrap = styled.div`
 
 const RecWrap = styled.div`
     position: fixed;
+    width: 33.33vw;
+    /* min-height: 79.62vh; */
     right: 5.67vw;
+    overflow:hidden;
+    div.drawbox{
+        overflow:hidden;
+        width: 33.125vw;
+        /* max-height : 68.61vh; */
+        height: 38.54vw;
+    }
     section{
         background-color: ${colors.mainIvory};
         width: 33.125vw;
+        /* max-height : 68.61vh; */
         height: 38.54vw;
         overflow: hidden;
     }
@@ -65,6 +77,15 @@ const RecWrap = styled.div`
         display: flex;
         gap: 1.45vw;
     }
+`
+const BtnWrap = styled.div`
+    position: fixed;
+    width: 33.33vw;
+    /* min-height: 79.62vh; */
+    right: 5.67vw;
+    top: 50vw;
+    display: flex;
+    gap: 1.45vw;
 `
 
 const ResetBtn = styled.button`
@@ -82,28 +103,114 @@ const CraftingBtn = styled.button`
 `
 
 const DraggableImg = styled.img`
-  position: absolute;
-  cursor: move;
-  user-select: none;
-  resize: both;
-  overflow: auto;
-  transform: ${({ rotate }) => `rotate(${rotate}deg)`};
+    position: absolute;
+    cursor: move;
+    user-select: none;
+    resize: both;
+    overflow: auto;
+
 `;
 
 
 const Sticker = () => {
 
     const [selectedImages, setSelectedImages] = useState([]);
+    const [selectedId, setSelectedId] = useState(null); // 현재 선택된 이미지의 id를 저장
+
+    // reset
+    const handleReset = () => {
+        setSelectedImages([]); // 모든 이미지 제거
+    };
 
     // 이미지 클릭 시 <RecWrap>의 <section>에 추가
     const handleImageClick = (src) => {
         setSelectedImages((prevImages) => [
             ...prevImages,
-            { src, id: Date.now(), top: 'center', left: 'center', rotate: 0 },
+            { src, id: Date.now(), top: 'center', left: 'center', x: 0, y: 0, rotate: 0 ,isDragging: false},
         ]);
     };
 
+    // Drag 구현
+    const handleMouseDown = (id, clickEvent) => {
+
+        clickEvent.preventDefault();
+        setSelectedId(id); // 클릭한 이미지의 id를 선택 상태로 설정
+        // 드래그 시작 시의 위치 저장
+        const initialX = clickEvent.clientX;
+        const initialY = clickEvent.clientY;
+        const { x: startX, y: startY } = selectedImages.find((img) => img.id === id);
     
+        setSelectedImages((prevImages) =>
+            prevImages.map((img) =>
+                img.id === id ? { ...img, isDragging: true } : img
+            )
+        );
+            
+        const mouseMoveHandler = (moveEvent) => {
+            const deltaX = moveEvent.clientX - initialX;
+            const deltaY = moveEvent.clientY - initialY;
+            
+            
+            setSelectedImages((prevImages) =>
+            prevImages.map((img) =>
+                img.id === id
+                // 이미지 초기 위치 (startX,Y) + 이동거리 (deltaX,Y)를 현재 이미지 위치에 더함
+                ? { ...img, x: startX + deltaX, y: startY + deltaY }
+                : img
+            )
+            );
+
+            console.log("마우스움직이는중")
+        };
+        
+        const mouseUpHandler = () => {
+            document.removeEventListener("mousemove", mouseMoveHandler);
+            document.removeEventListener("mouseup", mouseUpHandler);
+            console.log("mouseUpHandler")
+        };
+        
+        document.addEventListener("mousemove", mouseMoveHandler);
+        document.addEventListener("mouseup", mouseUpHandler, { once: true });
+    };
+
+    const refs = useRef({}); // 각 이미지의 ref 저장
+    // 이미지 클릭 시 선택 상태 업데이트
+    const handleSelect = (id, e) => {
+        e.stopPropagation();
+        setSelectedId(id);
+    };
+
+
+    // 빈 공간 클릭 시 선택 해제
+    const handleDeselect = (e) => {
+        if (e.target === e.currentTarget) {
+        setSelectedId(null);
+        }
+    };
+
+    // section 영역 ref
+    const sectionRef = useRef(null);
+
+    // save
+    const captureRef = useRef();
+
+    const handleSaveAsPng = async () => {
+        if (captureRef.current) {
+            try {
+                const canvas = await html2canvas(captureRef.current);
+                const dataURL = canvas.toDataURL("image/png");
+
+                // 다운로드 링크 생성
+                const link = document.createElement("a");
+                link.href = dataURL;
+                link.download = "capture.png";
+                link.click();
+            } catch (error) {
+                console.error("Error capturing the element:", error);
+            }
+        }
+    };
+
 
     return (
         <StickerBoxWrap>
@@ -111,7 +218,9 @@ const Sticker = () => {
                 <div>
                     <CategoryText> Brand Logo </CategoryText>
                     <DisplayGrid>
-                        <DefaultImg onClick={() => handleImageClick(Sticker_BL1)} src= {Sticker_BL1} />
+                        <DefaultImg onClick={() => handleImageClick(Sticker_BL1)} src= {Sticker_BL1} 
+
+                        />
                         <DefaultImg onClick={() => handleImageClick(Sticker_BL2)} src= {Sticker_BL2} />
                         <DefaultImg onClick={() => handleImageClick(Sticker_BL3)} src= {Sticker_BL3} />
                         <DefaultImg onClick={() => handleImageClick(Sticker_BL4)} src= {Sticker_BL4} />
@@ -173,51 +282,94 @@ const Sticker = () => {
                 <div>
                     <CategoryText> Drawing Element </CategoryText>
                     <DisplayGrid>
-                        <DefaultImg onClick={() => handleImageClick(Drawing_1)} src= {Drawing_1} />
-                        <DefaultImg onClick={() => handleImageClick(Drawing_2)} src= {Drawing_2} />
-                        <DefaultImg onClick={() => handleImageClick(Drawing_3)} src= {Drawing_3} />
-                        <DefaultImg onClick={() => handleImageClick(Drawing_4)} src= {Drawing_4} />
-                        <DefaultImg onClick={() => handleImageClick(Drawing_5)} src= {Drawing_5} />
-                        <DefaultImg onClick={() => handleImageClick(Drawing_6)} src= {Drawing_6} />
-                        <DefaultImg onClick={() => handleImageClick(Drawing_7)} src= {Drawing_7} />
-                        <DefaultImg onClick={() => handleImageClick(Drawing_8)} src= {Drawing_8} />
-                        <DefaultImg onClick={() => handleImageClick(Drawing_9)} src= {Drawing_9} />
-                        <DefaultImg onClick={() => handleImageClick(Drawing_10)} src= {Drawing_10} />
-                        <DefaultImg onClick={() => handleImageClick(Drawing_11)} src= {Drawing_11} />
-                        <DefaultImg onClick={() => handleImageClick(Drawing_12)} src= {Drawing_12} />
-                        <DefaultImg onClick={() => handleImageClick(Drawing_13)} src= {Drawing_13} />
-                        <DefaultImg onClick={() => handleImageClick(Drawing_14)} src= {Drawing_14} />
-                        <DefaultImg onClick={() => handleImageClick(Drawing_15)} src= {Drawing_15} />
-                        <DefaultImg onClick={() => handleImageClick(Drawing_16)} src= {Drawing_16} />
-                        <DefaultImg onClick={() => handleImageClick(Drawing_17)} src= {Drawing_17} />
-                        <DefaultImg onClick={() => handleImageClick(Drawing_18)} src= {Drawing_18} />
+                        <DefaultImg onClick={() => handleImageClick(ele_1)} src= {ele_1} />
+                        <DefaultImg onClick={() => handleImageClick(ele_2)} src= {ele_2} />
+                        <DefaultImg onClick={() => handleImageClick(ele_3)} src= {ele_3} />
+                        <DefaultImg onClick={() => handleImageClick(ele_4)} src= {ele_4} />
+                        <DefaultImg onClick={() => handleImageClick(ele_5)} src= {ele_5} />
+                        <DefaultImg onClick={() => handleImageClick(ele_6)} src= {ele_6} />
+                        <DefaultImg onClick={() => handleImageClick(ele_7)} src= {ele_7} />
+                        <DefaultImg onClick={() => handleImageClick(ele_8)} src= {ele_8} />
+                        <DefaultImg onClick={() => handleImageClick(ele_9)} src= {ele_9} />
+                        <DefaultImg onClick={() => handleImageClick(ele_10)} src= {ele_10} />
+                        <DefaultImg onClick={() => handleImageClick(ele_11)} src= {ele_11} />
+                        <DefaultImg onClick={() => handleImageClick(ele_12)} src= {ele_12} />
+                        <DefaultImg onClick={() => handleImageClick(ele_13)} src= {ele_13} />
+                        <DefaultImg onClick={() => handleImageClick(ele_14)} src= {ele_14} />
+                        <DefaultImg onClick={() => handleImageClick(ele_15)} src= {ele_15} />
+                        <DefaultImg onClick={() => handleImageClick(ele_16)} src= {ele_16} />
+                        <DefaultImg onClick={() => handleImageClick(ele_17)} src= {ele_17} />
+                        <DefaultImg onClick={() => handleImageClick(ele_18)} src= {ele_18} />
                     </DisplayGrid>
                 </div>
             </ObjWrap>
-            <RecWrap>
+            <RecWrap>   
                 <section>
+                    <div className="drawbox"
+                        ref={sectionRef}
+                        ref={captureRef}
+                        onMouseDown={handleDeselect}
+                    >
                         {selectedImages.map((img) => (
-                            <DraggableImg
-                            key={img.id}
-                            src={img.src}
-                            alt="Selected Sticker"
-                            style={{
-                                top: img.top,
-                                left: img.left,
-                                width: '100px',
-                                height: '100px',
-                            }}
-                            rotate={img.rotate}
-                            />
+                            <div
+                                key={img.id}
+                                style={{
+                                    position: "absolute",
+                                    top: img.y,
+                                    left: img.x,
+                                    transform: `translate(${img.x}px, ${img.y}px)` 
+                                }}
+                                onMouseDown={(e) => handleSelect(img.id, e)}
+                            >         
+                            {/* 개별 Moveable 컴포넌트는 선택된 이미지에만 렌더링 */}
+                            {selectedId === img.id && (      
+                            <Moveable
+                                target={refs.current[img.id]}
+                                rotatable={true}
+                                resizable={true}
+                                keepRatio={false}
+                                throttleResize={1}
+                                renderDirections={["nw","n","ne","w","e","sw","s","se"]}
+                                onResize={e => {
+                                    e.target.style.width = `${e.width}px`;
+                                    e.target.style.height = `${e.height}px`;
+                                    e.target.style.transform = e.drag.transform;
+                                }}
+                                rotationPosition={"top"}
+                                onRotate={e => {
+                                    e.target.style.transform = e.drag.transform;
+                                }}
+                            /> 
+                            )}      
+                                <DraggableImg
+                                    key={img.id}
+                                    src={img.src}
+                                    alt="Selected Sticker"
+                                    style={{
+                                        width: "100px",
+                                        height: "100px",
+
+                                    }}
+                                    ref={(el) => (refs.current[img.id] = el)} // 각 이미지를 고유 ref로 연결
+                                    rotate={img.rotate}
+                                    onMouseDown={(e) => handleMouseDown(img.id, e)}
+                                    onClick={(e) => e.stopPropagation()} // 이미지 클릭 시 이벤트 전파 중지
+                                />
+                                    
+                            </div>
                         ))}
+
+                        </div>
                 </section>
-                <div className="btn_wrap"> 
-                    <ResetBtn> Reset </ResetBtn>
-                    <CraftingBtn> Crafting </CraftingBtn>
-                </div>
             </RecWrap>
+            <BtnWrap> 
+                    <ResetBtn onClick={handleReset}> Reset </ResetBtn>
+                    <CraftingBtn  onClick={handleSaveAsPng}> Crafting </CraftingBtn>
+            </BtnWrap>
         </StickerBoxWrap>
     );
 };
 
 export default Sticker;
+
+

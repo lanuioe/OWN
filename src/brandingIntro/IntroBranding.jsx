@@ -19,7 +19,7 @@ import Typo_E from '../assets/brandingIntro/typo_e.png'
 import Typo_Kimg from '../assets/brandingIntro/typo_kk.png'
 import Typo_Eimg from '../assets/brandingIntro/typo_ee.png'
 import Intro_logo from '../assets/brandingIntro/Intro_logo.png'
-import Own_logo_1 from '../assets/brandingIntro/own_logo_1.png'
+import Own_logo_1 from '../assets/brandingIntro/own_logo_1.gif'
 import Own_logo_2 from '../assets/brandingIntro/own_logo_2.png'
 import Own_logo_3 from '../assets/brandingIntro/own_logo_3.png'
 import Own_logo_4 from '../assets/brandingIntro/own_logo_4.png'
@@ -66,8 +66,8 @@ const MainButton = styled.button`
     justify-content: center;
     align-items: center;
     img{
-        width: 6vh;
-        height: 6vh;
+        width: 6vw;
+        height: 6vw;
     }
 `
 const MainTextWrap = styled.div`
@@ -126,29 +126,25 @@ const CoreValueText = styled.div`
     }
 `
 const CoreValueImg = styled.div`
-    /* padding: 0 6.8vw; */
+    margin-top: 6.61vw;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1.56vw;
     div{
+        background-color: #faf4f4;
+        padding: 24.8vw 0 1.35vw 1.8vw;
         width: 27.7vw;
         height: 29.1vw;
         background-repeat: no-repeat;
         background-size: 100%;
         background-position: center;
-        position: relative;
         span{
             font-size: ${fontSize.kSizeText20};
-            position: absolute;
-            bottom: 1.9vw;
-            // 정확한 마진을 피그마에서 알수없어서 일단 보류
         }
         p{
             font-size: 1.66vw;
             font-weight: 500;
-            position: absolute;
-            bottom: 0;
         }
     }
 `
@@ -159,6 +155,7 @@ const HeadNum = styled.h4`
 `
 
 const HeadText = styled.h4`
+    white-space: nowrap;
     font-size: ${fontSize.introHead};
     line-height: 120%;
     font-weight: 600;
@@ -188,6 +185,7 @@ const TiredLifeRelaxWrap = styled.div`
         line-height: 9.06vw;
         text-align: right;
         font-weight: 500;
+        white-space: nowrap;
         span{
             font-size: 6.25vw; 
             margin-right: 4.47vw;
@@ -295,7 +293,7 @@ const OwnTypo = styled.div`
     }
     div:nth-child(1){
         background-image: url(${Typo_K});
-        background-size: contain;
+        background-size: cover;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -364,6 +362,16 @@ const OwnLogoText = styled.div`
 const OwnLogoImgWrap = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
+    img{ height: 100%; object-fit: cover;}
+    div{
+        width:100%; height: 100%;
+        background: ${colors.mainIvory};
+    }
+    img:nth-child(1){
+        width: 50vw;
+        height: auto; object-fit: contain;
+        margin: 20vw auto;
+    }
     img:nth-child(5){
         grid-column: 1 / span 2;
     }
@@ -379,6 +387,7 @@ const OwnMetapoText = styled.div`
     padding: 0 4.79vw;
 `
 const OwnMetapo = styled.div`
+    margin-top: 4.79vw;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.93vw;
@@ -424,9 +433,11 @@ const OwnMockWrap = styled.div`
     margin-top: 0.88vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 0.93vw;
     img:nth-child(1), img:nth-child(4){
         grid-column: 1 / span 2;
     }
+    img{ height: 100%; object-fit: cover;}
 `
 
 
@@ -562,7 +573,10 @@ const IntroBranding = () => {
                 </OwnLogoText>
                 <div className="own_logo_intro"> </div>
                 <OwnLogoImgWrap>
-                    <img src={Own_logo_1} />
+                    <div>
+                        <img src={Own_logo_1} />    
+                    </div>
+
                     <img src={Own_logo_2} />
                     <img src={Own_logo_3} />
                     <img src={Own_logo_4} />

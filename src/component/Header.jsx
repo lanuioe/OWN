@@ -43,7 +43,7 @@ const HeaderContentList = styled.ol`
 const ListItem = styled.li`
   font-size: ${vwCalc(24)};
   color: ${(props) => props.$color};
-  font-weight: ${(props) => (props.isActive ? 600 : 400)};
+  font-weight: ${(props) => (props.$isActive ? 600 : 400)};
   &:hover {
     font-weight: 600;
   }
@@ -97,17 +97,17 @@ const Header = () => {
       </Link>
       <ContentListWrap $color={color}>
         <HeaderContentList>
-          <ListItem isActive={isActive("/introbranding")} $color={color}>
+          <ListItem $isActive={isActive("/introbranding")} $color={color}>
             <Link to="/introbranding">BRANDING</Link>
           </ListItem>
-          <ListItem isActive={isActive("/appservice")} $color={color}>
+          <ListItem $isActive={isActive("/appservice")} $color={color}>
             <Link to="/appservice">SERVICE</Link>
           </ListItem>
-          <ListItem isActive={isActive("/analog")} $color={color}>
+          <ListItem $isActive={isActive("/analog")} $color={color}>
             <Link to="/analog">ANALOG</Link>
           </ListItem>
-          <ListItem isActive={isActive("/sticker")} $color={color}>
-            <Link to="/sticker">POSTCARD</Link>
+          <ListItem $isActive={isActive("/postcard")} $color={color}>
+            <Link to="/postcard">POSTCARD</Link>
           </ListItem>
         </HeaderContentList>
       </ContentListWrap>
